@@ -29,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
 	public ContactFilter2D movementFilter;
 	List<RaycastHit2D> castCollisions= new List<RaycastHit2D>();
 	public float collisionOffset = 0.05f;
+	bool dashujem = false;
+	Vector2 dashorientation;
+	bool invincible = false;
 
 	void Start()
 	{
@@ -56,7 +59,18 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (dashujem)
+		{
+			if (dashcooldown <= 1.9)
+			{
+				dashujem = false;
+				ms /= 5;
+				invincible = false;	
+			}
+			orientation = dashorientation;
+		}
 		putanja.Add(orientation);
+		
 		if (orientation.x > 0)
 		{
 			animator.SetBool("isright", true);
@@ -142,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
 			print("ROLES REVERSED");
 			ReverseRoles();
 		}
+
 	}
 
     private bool TryMove(Vector2 direction)
@@ -178,8 +193,11 @@ public class PlayerMovement : MonoBehaviour
 	{
 		print("dash");
 		inputtime.Add(time);
-		transform.position += (Vector3)(lookingDirection.normalized);
+		dashujem = true;
+		dashorientation = orientation;
 		dashcooldown = 2;
+		ms *= 5;
+		invincible = true;
 	}
 
 	private void SpawnBlade()
