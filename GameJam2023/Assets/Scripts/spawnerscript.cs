@@ -16,15 +16,11 @@ public class spawnerscript : MonoBehaviour
 
     }
 
-    void Update()
+    public void SpawnBlade()
 	{
-
-        if (Input.GetKeyUp("space") && PlayerMovement.isjuring)
-		{
-            Quaternion angle = Quaternion.Euler(new Vector3(0.0f, 0.0f, Mathf.Atan2(orientation.y, orientation.x)));
-            Instantiate(sawBlade, transform.position, angle);
-		}
-	}
+        Quaternion angle = Quaternion.Euler(new Vector3(0.0f, 0.0f, Mathf.Atan2(orientation.y, orientation.x)));
+        Instantiate(sawBlade, transform.position, angle);
+    }
 
     void FixedUpdate()
     {

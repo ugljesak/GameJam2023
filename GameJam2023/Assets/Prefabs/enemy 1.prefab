@@ -109,7 +109,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -126,5 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: -7175368973416338864, guid: c15e8000a7a78314e8d6c1ccc9947315, type: 3}
+  putanja: []
+  inputtime: []
   jurims: 2.5
   bezims: 5

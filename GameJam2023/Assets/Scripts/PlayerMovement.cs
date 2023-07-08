@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 	public List<Vector2> putanja= new List<Vector2>();
 	public List<float> inputtime= new List<float>();
 	public int brsrafova;
+	public spawnerscript ss;
+	public Animator animator;
 
 	void Start()
 	{
@@ -38,26 +40,26 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
-		if (!canmove)
+		if (canmove)
 		{
-			return;
-		}
+			float moveX = Input.GetAxisRaw("Horizontal");
+			float moveY = Input.GetAxisRaw("Vertical");
+			animator.SetFloat("xAxis", moveX);
+			animator.SetFloat("yAxis", moveY);
+			orientation = new Vector2(moveX, moveY).normalized;
+			if (orientation != Vector2.zero) lookingDirection = new Vector2(moveX, moveY);
+			bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
 
-		float moveX = Input.GetAxisRaw("Horizontal");
-		float moveY = Input.GetAxisRaw("Vertical");
-		orientation = new Vector2(moveX, moveY).normalized;
-		if (orientation != Vector2.zero) lookingDirection = new Vector2(moveX, moveY);
-		bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
-
-		if (moveX < 0) right = false;
-		if (moveX > 0) right = true;
-		if (right == false)
-		{
-			transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
-		}
-		else
-		{
-			transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
+			if (moveX < 0) right = false;
+			if (moveX > 0) right = true;
+			if (right == false)
+			{
+				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
+			}
+			else
+			{
+				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
+			}
 		}
 	}
 
@@ -73,11 +75,12 @@ public class PlayerMovement : MonoBehaviour
 			deltaX = Input.mousePosition.x - transform.position.x - Screen.width / 2;
 			//Debug.DrawLine(Input.mousePosition +camera.transform.position, camera.transform.position, Color.red, 2, false);
 
-			if (Input.GetKey(KeyCode.Space))
+			if (Input.GetKeyUp(KeyCode.Space))
 			{
 				if (isjuring)
 				{
-					//baci seckalicu
+					animator.SetBool("", true);
+					ss.SpawnBlade();
 				}
 				else
 				{
