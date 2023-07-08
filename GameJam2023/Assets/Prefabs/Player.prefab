@@ -152,13 +152,14 @@ MonoBehaviour:
   deltaY: 0
   lookingDirection: {x: 0, y: 0}
   rb: {fileID: 5049089922429890028}
-  jurims: 2.5
+  ms: 0
+  jurims: 3.5
   bezims: 5
   bladeSpawner: {fileID: 688185773480695843, guid: 643760675d313804796b04e367c6f288, type: 3}
   bladeOffset: {x: 0, y: 0, z: 1}
   bladeDistance: 0.8
-  dashcooldown: 2
-  sawcooldown: 0
+  dashCD: 2
+  sawCD: 2
   putanja: []
   inputtime: []
   brsrafova: 0

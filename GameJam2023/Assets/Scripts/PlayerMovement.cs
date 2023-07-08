@@ -19,8 +19,10 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject bladeSpawner;
 	public Vector3 bladeOffset;
 	public float bladeDistance;
-	public float dashcooldown;
-	public float sawcooldown;
+	float dashcooldown;
+	float sawcooldown;
+	public float dashCD;
+	public float sawCD;
 	public List<Vector2> putanja= new List<Vector2>();
 	public List<float> inputtime= new List<float>();
 	public int brsrafova;
@@ -71,39 +73,39 @@ public class PlayerMovement : MonoBehaviour
 		}
 		putanja.Add(orientation);
 		
-		if (orientation.x > 0)
-		{
-			animator.SetBool("isright", true);
-			animator.SetBool("isleft", false);
-        }
-		else if (orientation.x == 0)
-		{
-            animator.SetBool("isright", false);
-            animator.SetBool("isleft", false);
-        }
-        else
-        {
-            animator.SetBool("isleft", true);
-            animator.SetBool("isright", false);
-        }
-
-		if (orientation.y > 0)
-		{
-            animator.SetBool("isup", true);
-            animator.SetBool("isdown", false);
-        }
-        else if (orientation.y == 0)
-        {
-            animator.SetBool("isup", false);
-            animator.SetBool("isdown", false);
-        }
-        else
-        {
-            animator.SetBool("isdown", true);
-            animator.SetBool("isup", false);
-        }
         if (canmove)
 		{
+            if (orientation.x > 0)
+            {
+                animator.SetBool("isright", true);
+                animator.SetBool("isleft", false);
+            }
+            else if (orientation.x == 0)
+            {
+                animator.SetBool("isright", false);
+                animator.SetBool("isleft", false);
+            }
+            else
+            {
+                animator.SetBool("isleft", true);
+                animator.SetBool("isright", false);
+            }
+
+            if (orientation.y > 0)
+            {
+                animator.SetBool("isup", true);
+                animator.SetBool("isdown", false);
+            }
+            else if (orientation.y == 0)
+            {
+                animator.SetBool("isup", false);
+                animator.SetBool("isdown", false);
+            }
+            else
+            {
+                animator.SetBool("isdown", true);
+                animator.SetBool("isup", false);
+            }
             if (orientation != Vector2.zero)
             {
                 bool success = TryMove(orientation);
@@ -191,19 +193,69 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Dash()
 	{
-		print("dash");
 		inputtime.Add(time);
 		dashujem = true;
 		dashorientation = orientation;
-		dashcooldown = 2;
+		dashcooldown = dashCD;
 		ms *= 5;
 		invincible = true;
 	}
 
 	private void SpawnBlade()
 	{
-		print("blade");
+		if (lookingDirection.x == 0)
+		{
+			if (lookingDirection.y > 0)
+			{
+				animator.SetTrigger("sawu");
+			}
+			else
+			{
+				animator.SetTrigger("sawd");
+			}
+		}
+		else if (lookingDirection.x > 0)
+		{
+			if (lookingDirection.y > 0)
+			{
+				animator.SetTrigger("sawur");
+			}
+			else if (lookingDirection.y < 0)
+			{
+                animator.SetTrigger("sawdr");
+            }
+			else
+			{
+                animator.SetTrigger("sawr");
+            }
+		}
+		else
+		{
+            if (lookingDirection.y > 0)
+            {
+                animator.SetTrigger("sawul");
+            }
+            else if (lookingDirection.y < 0)
+            {
+                animator.SetTrigger("sawdl");
+            }
+            else
+            {
+                animator.SetTrigger("sawl");
+            }
+        }
+    }
+
+	private void SawStart()
+	{
+		canmove = false;
+        animator.SetBool("ismoving", false);
+    }
+
+	private void SawEnd()
+	{
         ss.SpawnBlade();
-		sawcooldown = 2;
+        sawcooldown = sawCD;
+        canmove = true;
     }
 }
