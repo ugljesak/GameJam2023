@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	static public float rotationAngle;
-	static public float deltaX, deltaY;
 	float time;
+	public float deltaX, deltaY;
 	Vector2 orientation;
+	public Vector2 lookingDirection;
 	Rigidbody2D rb;
 	float ms; // move speed
+	public float dashCooldown;
 	public float jurims;
 	public float bezims;
+	public GameObject bladeSpawner;
 	//public Transform bladeSpawner;
 	public Vector3 bladeOffset;
 	public float bladeDistance;
@@ -24,35 +26,39 @@ public class PlayerMovement : MonoBehaviour
 
 	void Start()
 	{
+		//Instantiate(bladeSpawner, transform.position, Quaternion.identity);
 		rb = GetComponent<Rigidbody2D>();
 		transform.position = Vector3.zero;
 		right = true;
 		ms = jurims;
 		time = 0;
+		dashCooldown = 0;
 		dashcooldown = 0;
 		putanja.Add(Vector2.zero);
 	}
 
 	void Update()
 	{
-		if (canmove)
+		if (!canmove)
 		{
-			float moveX = Input.GetAxisRaw("Horizontal");
-			float moveY = Input.GetAxisRaw("Vertical");
-			orientation = new Vector2(moveX, moveY).normalized;
+			return;
+		}
 
-			//bladeSpawner.position = transform.position + bladeOffset + new Vector3(orientation.x * bladeDistance, orientation.y * bladeDistance, 0);
+		float moveX = Input.GetAxisRaw("Horizontal");
+		float moveY = Input.GetAxisRaw("Vertical");
+		orientation = new Vector2(moveX, moveY).normalized;
+		if (orientation != Vector2.zero) lookingDirection = new Vector2(moveX, moveY);
+		bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
 
-			if (moveX < 0) right = false;
-			if (moveX > 0) right = true;
-			if (right == false)
-			{
-				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
-			}
-			else
-			{
-				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
-			}
+		if (moveX < 0) right = false;
+		if (moveX > 0) right = true;
+		if (right == false)
+		{
+			transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
+		}
+		else
+		{
+			transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
 		}
 	}
 
@@ -116,5 +122,7 @@ public class PlayerMovement : MonoBehaviour
         inputtime.Add(time);
         transform.position += (Vector3)orientation;
 		dashcooldown = 3;
+		transform.position += (Vector3)(lookingDirection.normalized);
+		dashCooldown = 2;
 	}
 }
