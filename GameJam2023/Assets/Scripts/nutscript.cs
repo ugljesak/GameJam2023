@@ -10,15 +10,14 @@ public class nutscript : MonoBehaviour
     {
         
     }
-
-	private void OnCollisionEnter2D(Collision2D collision)
+	
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		print("UVACEN SI BATO BRE");
 		if(collision.gameObject.tag == "Player")
 		{
 			nutCount++;
-			Destroy(gameObject);
-			Instantiate(gameObject, Vector3.zero, Quaternion.identity);
+			transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
 		}
 	}
 }
