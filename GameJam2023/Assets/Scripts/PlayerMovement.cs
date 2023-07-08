@@ -5,16 +5,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	float time;
+	[HideInInspector]
 	public float deltaX, deltaY;
 	Vector2 orientation;
 	public Vector2 lookingDirection;
 	Rigidbody2D rb;
 	float ms; // move speed
-	public float dashCooldown;
 	public float jurims;
 	public float bezims;
 	public GameObject bladeSpawner;
-	//public Transform bladeSpawner;
 	public Vector3 bladeOffset;
 	public float bladeDistance;
 	public float dashcooldown;
@@ -26,13 +25,11 @@ public class PlayerMovement : MonoBehaviour
 
 	void Start()
 	{
-		//Instantiate(bladeSpawner, transform.position, Quaternion.identity);
 		rb = GetComponent<Rigidbody2D>();
 		transform.position = Vector3.zero;
 		right = true;
 		ms = jurims;
 		time = 0;
-		dashCooldown = 0;
 		dashcooldown = 0;
 		putanja.Add(Vector2.zero);
 	}
@@ -68,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
 		if (canmove)
 		{
 			rb.velocity = new Vector2(orientation.x * ms, orientation.y * ms);
+			bladeSpawner.GetComponent<spawnerscript>().playerPosition = transform.position;
 
 			deltaY = Input.mousePosition.y - transform.position.y - Screen.height / 2;
 			deltaX = Input.mousePosition.x - transform.position.x - Screen.width / 2;
@@ -83,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 				{
 					if (dashcooldown <= 0)
 					{
-                        Dash();
+						Dash();
 					}
 				}
 			}
@@ -91,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 		//print (orientation);
 		dashcooldown-= Time.fixedDeltaTime;
 		//print(dashcooldown);
-        time += Time.fixedDeltaTime;
+		time += Time.fixedDeltaTime;
 		if (time >= 5)
 		{
 			print("ROLES REVERSED");
@@ -99,12 +97,12 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-    private void ReverseRoles()
-    {
+	private void ReverseRoles()
+	{
 
-        putanja.Clear();
-        inputtime.Clear();
-        time = 0;
+		putanja.Clear();
+		inputtime.Clear();
+		time = 0;
 		if (isjuring)
 		{
 			ms = bezims;
@@ -115,14 +113,12 @@ public class PlayerMovement : MonoBehaviour
 			ms = jurims;
 			isjuring = true;
 		}
-    }
+	}
 
 	private void Dash()
 	{
-        inputtime.Add(time);
-        transform.position += (Vector3)orientation;
-		dashcooldown = 3;
+		inputtime.Add(time);
 		transform.position += (Vector3)(lookingDirection.normalized);
-		dashCooldown = 2;
+		dashcooldown = 2;
 	}
 }
