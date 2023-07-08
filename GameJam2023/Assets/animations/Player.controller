@@ -119,7 +119,7 @@ AnimatorStateMachine:
     m_Position: {x: 650, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7236154565653898626}
-    m_Position: {x: 420, y: -60, z: 0}
+    m_Position: {x: 240, y: -80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 357827444672877967}
     m_Position: {x: -470, y: -420, z: 0}
@@ -128,10 +128,10 @@ AnimatorStateMachine:
     m_Position: {x: -690, y: -420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1676350144613938768}
-    m_Position: {x: 200, y: -70, z: 0}
+    m_Position: {x: -70, y: -70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5264853066352691825}
-    m_Position: {x: 30, y: -20, z: 0}
+    m_Position: {x: -360, y: -70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7123761075511109059}
     m_Position: {x: -250, y: -410, z: 0}
@@ -156,7 +156,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -360, y: -290, z: 0}
   m_EntryPosition: {x: -200, y: 100, z: 0}
-  m_ExitPosition: {x: 1010, y: 250, z: 0}
+  m_ExitPosition: {x: 450, y: -470, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -2523531758128919793}
 --- !u!1101 &-6792390824966972646
@@ -439,6 +439,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: sawdl
     m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: newint
+    m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
