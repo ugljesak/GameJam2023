@@ -73,7 +73,6 @@ public class enemyscript : MonoBehaviour
         }
         else
         {
-            print("dash");
             Dash();
         }
     }
