@@ -14,7 +14,16 @@ public class sawbladescript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         //print(transform.rotation.eulerAngles.z);
-        rb.velocity = new Vector2(Mathf.Cos(transform.rotation.eulerAngles.z), Mathf.Sin(transform.rotation.eulerAngles.z)) * speed;
+        float angle = transform.rotation.eulerAngles.z;
+        if (angle % 360 < 180)
+		{
+            rb.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * speed;
+		}
+		else
+		{
+            angle -= 360;
+            rb.velocity = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * speed;
+		}
         time = Time.time;
     }
 

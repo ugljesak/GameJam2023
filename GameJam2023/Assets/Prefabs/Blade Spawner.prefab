@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75fed947efa77fc499018ae18c5e66fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bladeOffset: {x: 0, y: -0.4, z: 1}
-  bladeDistance: 0.7
+  bladeOffset: {x: 0, y: 0, z: 1}
+  bladeDistance: 0.8
   orientation: {x: 0, y: -1}
   sawBlade: {fileID: 4945637116552300809, guid: 7214f89f3efd80c4db61de5394d6cd72, type: 3}
-  playerPosition: {x: -1.4763145, y: -0.418198, z: 0}
+  playerPosition: {x: 5.5045905, y: 2.5809393, z: 0}

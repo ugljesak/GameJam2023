@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	public static bool isjuring = true;
+	public static bool canmove = true;
+	
 	float time;
 	[HideInInspector]
 	public float deltaX, deltaY;
@@ -18,10 +21,9 @@ public class PlayerMovement : MonoBehaviour
 	public float bladeDistance;
 	public float dashcooldown;
 	bool right;
-	bool canmove = true;
-	bool isjuring = true;
 	public List<Vector2> putanja= new List<Vector2>();
 	public List<float> inputtime= new List<float>();
+	public int brsrafova;
 
 	void Start()
 	{
