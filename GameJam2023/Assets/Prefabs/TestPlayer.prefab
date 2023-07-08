@@ -125,11 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1212098e5739a244ab91bd9aa663f358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  gun: {fileID: 0}
-  bulletSpawner: {fileID: 0}
-  gunOffset: {x: 0, y: 0, z: 0}
-  bulletSpawnerOffset: {x: 0, y: 0, z: 0}
-  camera: {fileID: 0}
-  delayFactor: 0
-  animator: {fileID: 0}
+  time: 0
+  jurims: 2.5
+  bezims: 5
+  bladeOffset: {x: 0, y: 0, z: 0}
+  bladeDistance: 0
