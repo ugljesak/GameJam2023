@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	static public float rotationAngle;
-	static public float deltaX, deltaY;
-	public float time;
+	float time;
+	public float deltaX, deltaY;
 	Vector2 orientation;
+	public Vector2 lookingDirection;
 	Rigidbody2D rb;
 	float ms; // move speed
+	public float dashCooldown;
 	public float jurims;
 	public float bezims;
-	public Transform bladeSpawner;
-	public Vector3 bladeOffset;
-	public float bladeDistance;
-	private float dashcooldown;
+	public GameObject bladeSpawner;
 	bool right;
 	bool canmove = true;
 	bool isjuring = true;
@@ -24,63 +22,65 @@ public class PlayerMovement : MonoBehaviour
 
 	void Start()
 	{
+		//Instantiate(bladeSpawner, transform.position, Quaternion.identity);
 		rb = GetComponent<Rigidbody2D>();
 		transform.position = Vector3.zero;
 		right = true;
 		ms = jurims;
 		time = 0;
-		dashcooldown = 0;
+		dashCooldown = 0;
 	}
 
 	void Update()
 	{
-		if (canmove)
+		if (!canmove)
 		{
-			float moveX = Input.GetAxisRaw("Horizontal");
-			float moveY = Input.GetAxisRaw("Vertical");
-			orientation = new Vector2(moveX, moveY).normalized;
+			return;
+		}
 
-			bladeSpawner.position = transform.position + bladeOffset + new Vector3(orientation.x * bladeDistance, orientation.y * bladeDistance, 0);
+		float moveX = Input.GetAxisRaw("Horizontal");
+		float moveY = Input.GetAxisRaw("Vertical");
+		orientation = new Vector2(moveX, moveY).normalized;
+		if (orientation != Vector2.zero) lookingDirection = new Vector2(moveX, moveY);
+		bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
 
-			if (moveX < 0) right = false;
-			if (moveX > 0) right = true;
-			if (right == false)
-			{
-				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
-			}
-			else
-			{
-				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
-			}
+		if (moveX < 0) right = false;
+		if (moveX > 0) right = true;
+		if (right == false)
+		{
+			transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
+		}
+		else
+		{
+			transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
 		}
 	}
 
 	private void FixedUpdate()
 	{
-		putanja.Add(transform.position);
-		if (canmove)
+		if (!canmove)
 		{
-			rb.velocity = new Vector2(orientation.x * ms, orientation.y * ms);
+			return;
+		}
+		rb.velocity = new Vector2(orientation.x * ms, orientation.y * ms);
+		bladeSpawner.GetComponent<spawnerscript>().playerPosition = transform.position;
 
-			deltaY = Input.mousePosition.y - transform.position.y - Screen.height / 2;
-			deltaX = Input.mousePosition.x - transform.position.x - Screen.width / 2;
-			//Debug.DrawLine(Input.mousePosition +camera.transform.position, camera.transform.position, Color.red, 2, false);
+		putanja.Add(transform.position);
+		//Debug.DrawLine(Input.mousePosition +camera.transform.position, camera.transform.position, Color.red, 2, false);
 
-			if (Input.GetKey(KeyCode.Space))
+		if (Input.GetKey(KeyCode.Space))
+		{
+			inputtime.Add(time);
+			if (isjuring)
 			{
-				inputtime.Add(time);
-				if (isjuring)
-				{
-					//baci seckalicu
-				}
-				else
-				{
-					if(dashcooldown<=0) Dash();
-				}
+				//baci seckalicu
+			}
+			else
+			{
+				if(dashCooldown<=0) Dash();
 			}
 		}
-		print (orientation);
-		dashcooldown-= Time.fixedDeltaTime;
+		dashCooldown-= Time.fixedDeltaTime;
 		//print(dashcooldown);
         time += Time.fixedDeltaTime;
 		if (time >= 5)
@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Dash()
 	{
-		transform.position += (Vector3)orientation;
-		dashcooldown = 3;
+		transform.position += (Vector3)(lookingDirection.normalized);
+		dashCooldown = 2;
 	}
 }

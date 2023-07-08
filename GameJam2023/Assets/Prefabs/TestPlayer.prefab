@@ -125,8 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1212098e5739a244ab91bd9aa663f358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0
+  dashCooldown: 0
   jurims: 2.5
   bezims: 5
-  bladeOffset: {x: 0, y: 0, z: 0}
-  bladeDistance: 0
+  bladeSpawner: {fileID: 688185773480695843, guid: 643760675d313804796b04e367c6f288, type: 3}
+  bladeOffset: {x: 0, y: -0.4, z: -1}
+  bladeDistance: 0.7
