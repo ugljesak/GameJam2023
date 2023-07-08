@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 orientation;
 	public Vector2 lookingDirection;
 	public Rigidbody2D rb; 
-	float ms; // move speed
+	public float ms;
 	public float jurims;
 	public float bezims;
 	public GameObject bladeSpawner;
@@ -118,15 +118,13 @@ public class PlayerMovement : MonoBehaviour
         int count = rb.Cast(direction, movementFilter, castCollisions, ms * Time.fixedDeltaTime + collisionOffset);
         if (count == 0)
         {
-			print("nema");
             rb.MovePosition(rb.position + direction * ms * Time.fixedDeltaTime);
             return true;
         }
-		print("ima");
         return false;
     }
 
-    private void ReverseRoles()
+	private void ReverseRoles()
 	{
 
 		putanja.Clear();
