@@ -57,7 +57,38 @@ public class PlayerMovement : MonoBehaviour
 	private void FixedUpdate()
 	{
 		putanja.Add(orientation);
-		if (canmove)
+		if (orientation.x > 0)
+		{
+			animator.SetBool("isright", true);
+			animator.SetBool("isleft", false);
+        }
+		else if (orientation.x == 0)
+		{
+            animator.SetBool("isright", false);
+            animator.SetBool("isleft", false);
+        }
+        else
+        {
+            animator.SetBool("isleft", true);
+            animator.SetBool("isright", false);
+        }
+
+		if (orientation.y > 0)
+		{
+            animator.SetBool("isup", true);
+            animator.SetBool("isdown", false);
+        }
+        else if (orientation.y == 0)
+        {
+            animator.SetBool("isup", false);
+            animator.SetBool("isdown", false);
+        }
+        else
+        {
+            animator.SetBool("isdown", true);
+            animator.SetBool("isup", false);
+        }
+        if (canmove)
 		{
             if (orientation != Vector2.zero)
             {
@@ -71,12 +102,13 @@ public class PlayerMovement : MonoBehaviour
                 {
                     success = TryMove(new Vector2(0, orientation.y));
                 }
-                animator.SetBool("ismoving", success);
+                animator.SetBool("ismoving", true);
             }
             else
             {
                 animator.SetBool("ismoving", false);
             }
+
 
 			bladeSpawner.GetComponent<spawnerscript>().playerPosition = transform.position;
 			//Debug.DrawLine(Input.mousePosition +camera.transform.position, camera.transform.position, Color.red, 2, false);
