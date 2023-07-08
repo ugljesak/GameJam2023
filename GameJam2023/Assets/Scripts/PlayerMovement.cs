@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 	public float deltaX, deltaY;
 	Vector2 orientation;
 	public Vector2 lookingDirection;
-	Rigidbody2D rb;
+	public Rigidbody2D rb; 
 	float ms; // move speed
 	public float jurims;
 	public float bezims;
@@ -20,21 +20,25 @@ public class PlayerMovement : MonoBehaviour
 	public Vector3 bladeOffset;
 	public float bladeDistance;
 	public float dashcooldown;
-	bool right;
+	public float sawcooldown;
 	public List<Vector2> putanja= new List<Vector2>();
 	public List<float> inputtime= new List<float>();
 	public int brsrafova;
 	public spawnerscript ss;
 	public Animator animator;
+	public ContactFilter2D movementFilter;
+	List<RaycastHit2D> castCollisions= new List<RaycastHit2D>();
+	public float collisionOffset = 0.05f;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
+		animator = GetComponent<Animator>();
 		transform.position = Vector3.zero;
-		right = true;
 		ms = jurims;
 		time = 0;
 		dashcooldown = 0;
+		sawcooldown = 0;
 		putanja.Add(Vector2.zero);
 	}
 
@@ -44,22 +48,9 @@ public class PlayerMovement : MonoBehaviour
 		{
 			float moveX = Input.GetAxisRaw("Horizontal");
 			float moveY = Input.GetAxisRaw("Vertical");
-			animator.SetFloat("xAxis", moveX);
-			animator.SetFloat("yAxis", moveY);
 			orientation = new Vector2(moveX, moveY).normalized;
 			if (orientation != Vector2.zero) lookingDirection = new Vector2(moveX, moveY);
 			bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
-
-			if (moveX < 0) right = false;
-			if (moveX > 0) right = true;
-			if (right == false)
-			{
-				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
-			}
-			else
-			{
-				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
-			}
 		}
 	}
 
@@ -68,19 +59,37 @@ public class PlayerMovement : MonoBehaviour
 		putanja.Add(orientation);
 		if (canmove)
 		{
-			rb.velocity = new Vector2(orientation.x * ms, orientation.y * ms);
-			bladeSpawner.GetComponent<spawnerscript>().playerPosition = transform.position;
+            if (orientation != Vector2.zero)
+            {
+                bool success = TryMove(orientation);
+                if (!success && orientation.x != 0)
+                {
+                    success = TryMove(new Vector2(orientation.x, 0));
 
-			deltaY = Input.mousePosition.y - transform.position.y - Screen.height / 2;
-			deltaX = Input.mousePosition.x - transform.position.x - Screen.width / 2;
+                }
+                if (!success && orientation.y != 0)
+                {
+                    success = TryMove(new Vector2(0, orientation.y));
+                }
+                animator.SetBool("ismoving", success);
+            }
+            else
+            {
+                animator.SetBool("ismoving", false);
+            }
+
+			bladeSpawner.GetComponent<spawnerscript>().playerPosition = transform.position;
 			//Debug.DrawLine(Input.mousePosition +camera.transform.position, camera.transform.position, Color.red, 2, false);
 
-			if (Input.GetKeyUp(KeyCode.Space))
+			if (Input.GetKey(KeyCode.Space))
 			{
 				if (isjuring)
 				{
-					animator.SetBool("", true);
-					ss.SpawnBlade();
+
+					if (sawcooldown <= 0)
+					{
+						SpawnBlade();
+					}
 				}
 				else
 				{
@@ -93,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 		//print (orientation);
 		dashcooldown-= Time.fixedDeltaTime;
+		sawcooldown-= Time.fixedDeltaTime;
 		//print(dashcooldown);
 		time += Time.fixedDeltaTime;
 		if (time >= 5)
@@ -102,7 +112,21 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-	private void ReverseRoles()
+    private bool TryMove(Vector2 direction)
+    {
+        if (direction == Vector2.zero) return false;
+        int count = rb.Cast(direction, movementFilter, castCollisions, ms * Time.fixedDeltaTime + collisionOffset);
+        if (count == 0)
+        {
+			print("nema");
+            rb.MovePosition(rb.position + direction * ms * Time.fixedDeltaTime);
+            return true;
+        }
+		print("ima");
+        return false;
+    }
+
+    private void ReverseRoles()
 	{
 
 		putanja.Clear();
@@ -122,8 +146,16 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Dash()
 	{
+		print("dash");
 		inputtime.Add(time);
 		transform.position += (Vector3)(lookingDirection.normalized);
 		dashcooldown = 2;
 	}
+
+	private void SpawnBlade()
+	{
+		print("blade");
+        ss.SpawnBlade();
+		sawcooldown = 2;
+    }
 }

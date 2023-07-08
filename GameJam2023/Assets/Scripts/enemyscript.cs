@@ -58,7 +58,7 @@ public class enemyscript : MonoBehaviour
     {
         if (i < putanja.Count)
         {
-            print("asdads");
+
             rb.velocity = putanja[i] * ms;
             i++;
             

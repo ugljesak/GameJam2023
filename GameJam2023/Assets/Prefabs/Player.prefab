@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -854726760, guid: d5d5160a199ffa6468936b4adfb6f20e, type: 3}
+  m_Sprite: {fileID: 2073520628, guid: 7158b716ef8dd8a45ad591c806555c25, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.4375}
+  m_Size: {x: 1, y: 0.875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98,7 +98,7 @@ Animator:
   m_GameObject: {fileID: 8854782484848328855}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: af7555f77248fba4f87e6731ee758044, type: 2}
+  m_Controller: {fileID: 9100000, guid: cf487a1ac3db7804e820d6e081cab746, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -151,15 +151,34 @@ MonoBehaviour:
   deltaX: 0
   deltaY: 0
   lookingDirection: {x: 0, y: 0}
+  rb: {fileID: 5049089922429890028}
   jurims: 2.5
   bezims: 5
   bladeSpawner: {fileID: 688185773480695843, guid: 643760675d313804796b04e367c6f288, type: 3}
   bladeOffset: {x: 0, y: 0, z: 1}
   bladeDistance: 0.8
   dashcooldown: 2
+  sawcooldown: 0
   putanja: []
   inputtime: []
   brsrafova: 0
+  ss: {fileID: 0}
+  animator: {fileID: 6531144886318275881}
+  movementFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 1
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  collisionOffset: 0.05
 --- !u!60 &5969624088617033732
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -197,7 +216,7 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 0.875}
-    newSize: {x: 0.5, y: 0.4375}
+    newSize: {x: 1, y: 0.875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
