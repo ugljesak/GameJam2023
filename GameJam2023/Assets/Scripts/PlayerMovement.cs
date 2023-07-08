@@ -6,21 +6,21 @@ public class PlayerMovement : MonoBehaviour
 {
 	static public float rotationAngle;
 	static public float deltaX, deltaY;
-	public float time;
+	float time;
 	Vector2 orientation;
 	Rigidbody2D rb;
 	float ms; // move speed
 	public float jurims;
 	public float bezims;
-	public Transform bladeSpawner;
+	//public Transform bladeSpawner;
 	public Vector3 bladeOffset;
 	public float bladeDistance;
-	private float dashcooldown;
+	public float dashcooldown;
 	bool right;
 	bool canmove = true;
 	bool isjuring = true;
-	List<Vector2> putanja= new List<Vector2>();
-	List<float> inputtime= new List<float>();
+	public List<Vector2> putanja= new List<Vector2>();
+	public List<float> inputtime= new List<float>();
 
 	void Start()
 	{
@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 		ms = jurims;
 		time = 0;
 		dashcooldown = 0;
+		putanja.Add(Vector2.zero);
 	}
 
 	void Update()
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
 			float moveY = Input.GetAxisRaw("Vertical");
 			orientation = new Vector2(moveX, moveY).normalized;
 
-			bladeSpawner.position = transform.position + bladeOffset + new Vector3(orientation.x * bladeDistance, orientation.y * bladeDistance, 0);
+			//bladeSpawner.position = transform.position + bladeOffset + new Vector3(orientation.x * bladeDistance, orientation.y * bladeDistance, 0);
 
 			if (moveX < 0) right = false;
 			if (moveX > 0) right = true;
@@ -57,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		putanja.Add(transform.position);
+		putanja.Add(orientation);
 		if (canmove)
 		{
 			rb.velocity = new Vector2(orientation.x * ms, orientation.y * ms);
@@ -68,18 +69,20 @@ public class PlayerMovement : MonoBehaviour
 
 			if (Input.GetKey(KeyCode.Space))
 			{
-				inputtime.Add(time);
 				if (isjuring)
 				{
 					//baci seckalicu
 				}
 				else
 				{
-					if(dashcooldown<=0) Dash();
+					if (dashcooldown <= 0)
+					{
+                        Dash();
+					}
 				}
 			}
 		}
-		print (orientation);
+		//print (orientation);
 		dashcooldown-= Time.fixedDeltaTime;
 		//print(dashcooldown);
         time += Time.fixedDeltaTime;
@@ -87,12 +90,15 @@ public class PlayerMovement : MonoBehaviour
 		{
 			print("ROLES REVERSED");
 			ReverseRoles();
-			time = 0;
 		}
 	}
 
     private void ReverseRoles()
     {
+
+        putanja.Clear();
+        inputtime.Clear();
+        time = 0;
 		if (isjuring)
 		{
 			ms = bezims;
@@ -107,7 +113,8 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Dash()
 	{
-		transform.position += (Vector3)orientation;
+        inputtime.Add(time);
+        transform.position += (Vector3)orientation;
 		dashcooldown = 3;
 	}
 }
