@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 88b4513f9b16fba4c8109b3fdf6cdb8a
+guid: c2d6bef0b7689914dbde361ab0638ece
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sawblade-Sheet_0
+      name: blehRed_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
-        height: 32
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,83 +124,83 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17542450c72feaa4f8c4cedf5a3deabf
-      internalID: -1309514753
+      spriteID: 4873d3ea06e2a0b46af6e0ab0d553de0
+      internalID: -1077795798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sawblade-Sheet_1
+      name: blehRed_1
       rect:
         serializedVersion: 2
-        x: 33
+        x: 68
         y: 0
         width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 31
+      alignment: 9
+      pivot: {x: 0.41727924, y: 0.50609916}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92b33f5b9f0d38144a2aee284ad008c9
-      internalID: 679865436
+      spriteID: 5dcfb03c4dfa4934c87dc09e1420e972
+      internalID: -1740614744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sawblade-Sheet_2
+      name: blehRed_2
       rect:
         serializedVersion: 2
-        x: 66
+        x: 139
         y: 0
-        width: 32
+        width: 33
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.23644002, y: 0.4822741}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba6db79e5e8f09946bba55c9ddce859e
-      internalID: -609199687
+      spriteID: 79a0e408e8499d34987bcb5050e98ead
+      internalID: 1427300173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sawblade-Sheet_3
+      name: blehRed_3
       rect:
         serializedVersion: 2
-        x: 99
+        x: 201
         y: 0
-        width: 32
+        width: 54
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.202381, y: 0.51772577}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a565c66a83be9ac4cad92c92d3553774
-      internalID: -362089333
+      spriteID: 6dd13aabedda3c54fa895b00b93a8b40
+      internalID: 319839224
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sawblade-Sheet_4
+      name: blehRed_4
       rect:
         serializedVersion: 2
-        x: 132
+        x: 260
         y: 0
         width: 32
-        height: 32
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,29 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73f6dcded9d1c4249a75e845b1279207
-      internalID: 1777845648
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sawblade-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 165
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7acd31a09ce7b304a878396a184a33f6
-      internalID: 202684033
+      spriteID: 6e9a9985183ca0b40bccb6c00db22ad4
+      internalID: 1771722087
       vertices: []
       indices: 
       edges: []
@@ -246,12 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sawblade-Sheet_0: -1309514753
-      sawblade-Sheet_1: 679865436
-      sawblade-Sheet_2: -609199687
-      sawblade-Sheet_3: -362089333
-      sawblade-Sheet_4: 1777845648
-      sawblade-Sheet_5: 202684033
+      blehRed_0: -1077795798
+      blehRed_1: -1740614744
+      blehRed_2: 1427300173
+      blehRed_3: 319839224
+      blehRed_4: 1771722087
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

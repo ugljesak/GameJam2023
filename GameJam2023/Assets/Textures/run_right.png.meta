@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 88b4513f9b16fba4c8109b3fdf6cdb8a
+guid: ca5cc37a59ae22d4eb9ef61cb4a100ea
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sawblade-Sheet_0
+      name: run_right_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
-        height: 32
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17542450c72feaa4f8c4cedf5a3deabf
-      internalID: -1309514753
+      spriteID: 69388779fc1588a4c88d86e8a59d8f0f
+      internalID: 283549703
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sawblade-Sheet_1
+      name: run_right_1
       rect:
         serializedVersion: 2
         x: 33
         y: 0
         width: 32
-        height: 32
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92b33f5b9f0d38144a2aee284ad008c9
-      internalID: 679865436
+      spriteID: 0e1867f15c1e1b6479798fb847000bad
+      internalID: 1723841930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sawblade-Sheet_2
+      name: run_right_2
       rect:
         serializedVersion: 2
         x: 66
         y: 0
         width: 32
-        height: 32
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,71 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba6db79e5e8f09946bba55c9ddce859e
-      internalID: -609199687
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sawblade-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 99
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a565c66a83be9ac4cad92c92d3553774
-      internalID: -362089333
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sawblade-Sheet_4
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73f6dcded9d1c4249a75e845b1279207
-      internalID: 1777845648
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sawblade-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 165
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7acd31a09ce7b304a878396a184a33f6
-      internalID: 202684033
+      spriteID: 3310b261e1730334aa385a8a00bf1f8d
+      internalID: 942734675
       vertices: []
       indices: 
       edges: []
@@ -246,12 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sawblade-Sheet_0: -1309514753
-      sawblade-Sheet_1: 679865436
-      sawblade-Sheet_2: -609199687
-      sawblade-Sheet_3: -362089333
-      sawblade-Sheet_4: 1777845648
-      sawblade-Sheet_5: 202684033
+      run_right_0: 283549703
+      run_right_1: 1723841930
+      run_right_2: 942734675
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
