@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 orientation;
 	public Vector2 lookingDirection;
 	public Rigidbody2D rb; 
-	float ms; // move speed
+	public float ms;
 	public float jurims;
 	public float bezims;
 	public GameObject bladeSpawner;
@@ -29,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
 	public ContactFilter2D movementFilter;
 	List<RaycastHit2D> castCollisions= new List<RaycastHit2D>();
 	public float collisionOffset = 0.05f;
+	bool dashujem = false;
+	Vector2 dashorientation;
+	bool invincible = false;
 
 	void Start()
 	{
@@ -56,8 +59,50 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (dashujem)
+		{
+			if (dashcooldown <= 1.9)
+			{
+				dashujem = false;
+				ms /= 5;
+				invincible = false;	
+			}
+			orientation = dashorientation;
+		}
 		putanja.Add(orientation);
-		if (canmove)
+		
+		if (orientation.x > 0)
+		{
+			animator.SetBool("isright", true);
+			animator.SetBool("isleft", false);
+        }
+		else if (orientation.x == 0)
+		{
+            animator.SetBool("isright", false);
+            animator.SetBool("isleft", false);
+        }
+        else
+        {
+            animator.SetBool("isleft", true);
+            animator.SetBool("isright", false);
+        }
+
+		if (orientation.y > 0)
+		{
+            animator.SetBool("isup", true);
+            animator.SetBool("isdown", false);
+        }
+        else if (orientation.y == 0)
+        {
+            animator.SetBool("isup", false);
+            animator.SetBool("isdown", false);
+        }
+        else
+        {
+            animator.SetBool("isdown", true);
+            animator.SetBool("isup", false);
+        }
+        if (canmove)
 		{
             if (orientation != Vector2.zero)
             {
@@ -71,12 +116,13 @@ public class PlayerMovement : MonoBehaviour
                 {
                     success = TryMove(new Vector2(0, orientation.y));
                 }
-                animator.SetBool("ismoving", success);
+                animator.SetBool("ismoving", true);
             }
             else
             {
                 animator.SetBool("ismoving", false);
             }
+
 
 			bladeSpawner.GetComponent<spawnerscript>().playerPosition = transform.position;
 			//Debug.DrawLine(Input.mousePosition +camera.transform.position, camera.transform.position, Color.red, 2, false);
@@ -110,6 +156,7 @@ public class PlayerMovement : MonoBehaviour
 			print("ROLES REVERSED");
 			ReverseRoles();
 		}
+
 	}
 
     private bool TryMove(Vector2 direction)
@@ -118,15 +165,13 @@ public class PlayerMovement : MonoBehaviour
         int count = rb.Cast(direction, movementFilter, castCollisions, ms * Time.fixedDeltaTime + collisionOffset);
         if (count == 0)
         {
-			print("nema");
             rb.MovePosition(rb.position + direction * ms * Time.fixedDeltaTime);
             return true;
         }
-		print("ima");
         return false;
     }
 
-    private void ReverseRoles()
+	private void ReverseRoles()
 	{
 
 		putanja.Clear();
@@ -148,8 +193,11 @@ public class PlayerMovement : MonoBehaviour
 	{
 		print("dash");
 		inputtime.Add(time);
-		transform.position += (Vector3)(lookingDirection.normalized);
+		dashujem = true;
+		dashorientation = orientation;
 		dashcooldown = 2;
+		ms *= 5;
+		invincible = true;
 	}
 
 	private void SpawnBlade()

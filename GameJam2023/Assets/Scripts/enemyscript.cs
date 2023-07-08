@@ -11,7 +11,7 @@ public class enemyscript : MonoBehaviour
     public List<float> inputtime;
     float time;
     Rigidbody2D rb;
-    float ms; // move speed
+    public float ms;
     public float jurims;
     public float bezims;
     bool isjuring = false;
