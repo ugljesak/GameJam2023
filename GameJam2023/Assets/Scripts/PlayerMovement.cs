@@ -10,17 +10,15 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 orientation;
 	Rigidbody2D rb;
 	public float moveSpeed;
-	public Vector3 gunOffset;
-	public Vector3 bulletSpawnerOffset;
-	public float delayFactor;
+	public Transform bladeSpawner;
+	public Vector3 bladeOffset;
+	public float bladeDistance;
 	bool right;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		transform.position = Vector3.zero;
-		gunOffset = new Vector3(0.1f, 0.1f, -2f);
-		bulletSpawnerOffset = new Vector3(0.6f, 0.09f, -4f);
 		right = true;
 	}
 
@@ -30,9 +28,10 @@ public class PlayerMovement : MonoBehaviour
 		float moveY = Input.GetAxisRaw("Vertical");
 		orientation = new Vector2(moveX, moveY).normalized;
 
+		bladeSpawner.position = transform.position + bladeOffset + new Vector3(orientation.x * bladeDistance, orientation.y * bladeDistance, 0);
+
 		if (moveX < 0) right = false;
 		if (moveX > 0) right = true;
-
 		if (right == false)
 		{
 			transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
