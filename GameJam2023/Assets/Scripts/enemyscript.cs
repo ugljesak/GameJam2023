@@ -47,7 +47,7 @@ public class enemyscript : MonoBehaviour
         }
         time += Time.fixedDeltaTime;
         timezainput += Time.fixedDeltaTime;
-        if (time >= 5)
+        if (time >= 4.97)
         {
             print("ROLES REVERSED");
             ReverseRoles();
@@ -58,6 +58,7 @@ public class enemyscript : MonoBehaviour
     {
         if (i < putanja.Count)
         {
+            print("asdads");
             rb.velocity = putanja[i] * ms;
             i++;
             
