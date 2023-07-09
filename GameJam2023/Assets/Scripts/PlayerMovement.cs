@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 {
 	public static bool isjuring = true;
 	public static bool canmove = true;
-	public static int health;
 	
 	float time;
 	[HideInInspector]
@@ -296,8 +295,19 @@ public class PlayerMovement : MonoBehaviour
 			health--;
 			if (health == 0)
 			{
+				animator.SetTrigger("umro");
 				print("UMRO player"); //radi
 			}
 		}
+	}
+
+	private void DeathStart()
+	{
+		canmove = false;
+	}
+
+	private void DeathEnd()
+	{
+		Destroy(gameObject);
 	}
 }
