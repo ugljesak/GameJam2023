@@ -32,7 +32,7 @@ public class finishscript : MonoBehaviour
         }
         if(collision.gameObject.tag=="enemy" && !enemy.isjuring)
         {
-            print("izgubio si");
+            PlayerMovement.health = 0;
         }
     }
 }

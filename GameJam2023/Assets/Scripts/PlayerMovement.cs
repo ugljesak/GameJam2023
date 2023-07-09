@@ -37,8 +37,8 @@ public class PlayerMovement : MonoBehaviour
 	bool dashujem = false;
 	Vector2 dashorientation;
 	bool invincible = true;
-	Vector2 pozbezi=new Vector2(-10,-5);
-    Vector2 pozjuri = new Vector2(10, 5);
+	Vector2 pozbezi=new Vector2((float)-8.87, (float)-4.35);
+    Vector2 pozjuri = new Vector2((float)9.84, (float)4.35);
 	float CD;
 	public GameObject reverseSound;
 	public GameObject deathSound;
@@ -75,8 +75,13 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		
-		if (isjuring)
+        if (health <= 0)
+        {
+            animator.SetBool("umro", true);
+            deathSound.GetComponent<AudioSource>().Play();
+            print("UMRO player");
+        }
+        if (isjuring)
 		{
 			ms = jurims;
 		}
