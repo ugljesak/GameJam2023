@@ -39,8 +39,7 @@ public class PlayerMovement : MonoBehaviour
 	bool invincible = true;
 	Vector2 pozbezi=new Vector2(-10,-5);
     Vector2 pozjuri = new Vector2(10, 5);
-	public float CD;
-	bool canmovecd = false;
+	float CD;
 	public GameObject reverseSound;
 	public GameObject deathSound;
 	public GameObject dashSound;
@@ -59,13 +58,12 @@ public class PlayerMovement : MonoBehaviour
 		score = 0;
 		invincible = true;
 		health = 10;
-		CD = 0.3f;
 		isjuring = false;
 	}
 
 	void Update()
 	{
-		if (canmove && canmovecd)
+		if (canmove)
 		{
 			float moveX = Input.GetAxisRaw("Horizontal");
 			float moveY = Input.GetAxisRaw("Vertical");
@@ -100,9 +98,9 @@ public class PlayerMovement : MonoBehaviour
 		{
 			ms = bezims;
 		}
-        if(canmovecd == true) putanja.Add(orientation);
+        putanja.Add(orientation);
 		
-        if (canmove && canmovecd)
+        if (canmove)
 		{
             if (orientation.x > 0)
             {
@@ -188,7 +186,6 @@ public class PlayerMovement : MonoBehaviour
 			rolesmovement.revv = false;
 			reversedmovement.revv = false;
 			sawbladescript.revv = false;
-			canmovecd = true;
 		}
 
 	}
@@ -212,7 +209,6 @@ public class PlayerMovement : MonoBehaviour
 		inputtime.Clear();
         time = 0;
         CD = 3.4f;
-        canmovecd = false;
 		rolesmovement.revv = true;
 		reversedmovement.revv = true;
 		sawbladescript.revv = true;
@@ -242,7 +238,7 @@ public class PlayerMovement : MonoBehaviour
 	private void Dash()
 	{
 		dashSound.GetComponent<AudioSource>().Play();
-		if(canmovecd == true) inputtime.Add(time);
+		inputtime.Add(time);
 		dashujem = true;
 		dashorientation = orientation;
 		dashcooldown = dashCD;
@@ -252,7 +248,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void SpawnBlade()
 	{
-		if(canmovecd == true) inputtime.Add(time);
+		inputtime.Add(time);
 		if (lookingDirection.x == 0)
 		{
 			if (lookingDirection.y > 0)
