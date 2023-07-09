@@ -25,7 +25,7 @@ public class enemyscript : MonoBehaviour
     float timezainput;
     bool invincible = false;
     int maxhealth = 1;
-    public int health = 1;
+    public static int health = 1;
     Vector3 pozbezi = new Vector3(-1, -1, 1);
     Vector3 pozjuri = new Vector3(1, 1, 1);
 
@@ -52,10 +52,10 @@ public class enemyscript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         ms = jurims;
-        isjuring = false;
+        isjuring = true;
         time = 0;
         timezainput = 0;
-        transform.position = pozbezi;
+        transform.position = pozjuri;
         invincible = false;
         health = 1;
         maxhealth = 1;

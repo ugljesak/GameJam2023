@@ -10,12 +10,10 @@ public class ScoreTMP : MonoBehaviour
     [SerializeField] private TextMeshProUGUI MyTextElement;
     void Update()
     {
-        if (TrebaPovecatiScore == true)
-        {
-            CurrentScore++;
-            MyTextElement.text = CurrentScore.ToString();
-            TrebaPovecatiScore = false;
-        }
+
+        CurrentScore = PlayerMovement.score;
+         MyTextElement.text = CurrentScore.ToString();
+        
 
     }
 }

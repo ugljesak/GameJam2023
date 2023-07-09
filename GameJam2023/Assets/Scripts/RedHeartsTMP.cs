@@ -26,13 +26,13 @@ public class RedHeartsTMP : MonoBehaviour
     }
     void Update()
     {
-        if(PickUp == true)
-        {
-            CurrentPickUps++;
-            MyTextElement.text = CurrentPickUps + "/" + (StartingHp + Increase - 1).ToString();
-            PickUp = false;
-        }
-        if(IsChangedToRun == true)
+
+
+
+        CurrentPickUps = nutscript.nutCount;
+        MyTextElement.text = CurrentPickUps + "/" + (StartingHp + Increase - 1).ToString();
+            
+        if(!PlayerMovement.isjuring)
         {
             Increase++;
             CurrentPickUps = 0;
@@ -43,7 +43,7 @@ public class RedHeartsTMP : MonoBehaviour
             neededScriptHeart.RedHeartDisappear();
             neededScriptCog.CogAppear();
         }
-        if(IsChangedToShoot == true)
+        if(PlayerMovement.isjuring)
         {
             CurrentHp = StartingHp + Increase;
             MaxHp = CurrentHp;
@@ -53,16 +53,12 @@ public class RedHeartsTMP : MonoBehaviour
             neededScriptHeart.RedHeartAppear();
             neededScriptCog.CogDisappear(); 
         }
-        if(IsHitBlue == true)
+        if(PlayerMovement.health == 0)
         {
-            Increase = 0;
             DeathScreenVariable.Setup(deathscreenscore.GetComponent<ScoreTMP>().CurrentScore);
         }
-        if (IsHitRed == true)
-        {
-            CurrentHp--;
-            MyTextElement.text = CurrentHp.ToString() + "/" + MaxHp.ToString();
-            IsHitRed = false;
-        }
+        CurrentHp = enemyscript.health;
+        MyTextElement.text = CurrentHp.ToString() + "/" + MaxHp.ToString();
+ 
     }
 }
