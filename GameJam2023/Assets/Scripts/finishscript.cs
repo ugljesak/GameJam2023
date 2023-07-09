@@ -25,11 +25,11 @@ public class finishscript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player") //&& !PlayerMovement.isjuring)
         {
             print("tusam");
-            player.ReverseRoles();
             enemy.ReverseRoles();
+            player.ReverseRoles();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -35,19 +36,23 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 dashorientation;
 	bool invincible = true;
 	int health = 1;
+	Vector2 pozbezi=new Vector2(-1,-1);
+    Vector2 pozjuri = new Vector2(1, 1);
+
+	public int score=0;
 
 
-
-	void Start()
+    void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-		transform.position = Vector3.zero;
+		transform.position = pozjuri;
 		ms = jurims;
 		time = 0;
 		dashcooldown = 0;
 		sawcooldown = 0;
 		putanja.Add(Vector2.zero);
+		score = 0;
 	}
 
 	void Update()
@@ -195,6 +200,7 @@ public class PlayerMovement : MonoBehaviour
 			invincible = false;
 			animator.SetBool("juri", false);
 			dashcooldown = dashCD;
+			transform.position = pozbezi;
 		}
 		else
 		{
@@ -203,6 +209,8 @@ public class PlayerMovement : MonoBehaviour
 			invincible = true;
             animator.SetBool("juri", true);
 			sawcooldown = sawCD;
+			transform.position = pozjuri;
+			score++;
         }
 	}
 

@@ -14,7 +14,7 @@ public class enemyscript : MonoBehaviour
     public float ms;
     public float jurims;
     public float bezims;
-    bool isjuring = false;
+    private bool isjuring = false;
     int i = 0;
     int j = 0;
     bool bilazamena = false;
@@ -53,7 +53,6 @@ public class enemyscript : MonoBehaviour
     {
         if (i < putanja.Count)
         {
-
             rb.velocity = putanja[i] * ms;
             i++;
             
