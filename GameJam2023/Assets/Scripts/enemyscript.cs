@@ -16,7 +16,7 @@ public class enemyscript : MonoBehaviour
     public float ms;
     public float jurims;
     public float bezims;
-    public bool isjuring = false;
+    public bool isjuring;
     public Animator animator;
     int i = 0;
     int j = 0;
@@ -24,7 +24,7 @@ public class enemyscript : MonoBehaviour
     float timezainput;
     bool invincible = false;
     int maxhealth = 1;
-    int health = 1;
+    public int health = 1;
     Vector3 pozbezi = new Vector3(-1, -1, 1);
     Vector3 pozjuri = new Vector3(1, 1, 1);
 
@@ -206,6 +206,8 @@ public class enemyscript : MonoBehaviour
             invincible = false;
             animator.SetBool("juri", false);
             transform.position = pozbezi;
+            maxhealth++;
+            health = maxhealth;
         }
         else
         {
