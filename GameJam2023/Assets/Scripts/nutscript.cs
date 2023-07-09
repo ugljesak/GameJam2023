@@ -12,8 +12,16 @@ public class nutscript : MonoBehaviour
 		maxNut = 10;
 		nutCount = 0;
     }
-	
-	private void OnTriggerEnter2D(Collider2D collision)
+
+    private void FixedUpdate()
+    {
+		if (PlayerMovement.isjuring == true)
+		{
+            transform.position = new Vector3(100.0f, 100.0f, 0.0f);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if(collision.gameObject.tag == "Wall")
 		{
