@@ -26,8 +26,8 @@ public class enemyscript : MonoBehaviour
     bool invincible = false;
     int maxhealth = 1;
     public static int health = 1;
-    Vector3 pozbezi = new Vector3(-1, -1, 1);
-    Vector3 pozjuri = new Vector3(1, 1, 1);
+    Vector3 pozbezi = new Vector3(-10, -5, 1);
+    Vector3 pozjuri = new Vector3(10, 5, 1);
 
     public Vector2 lookingDirection;
     public GameObject bladeSpawner;

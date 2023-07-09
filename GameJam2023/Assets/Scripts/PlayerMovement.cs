@@ -37,8 +37,8 @@ public class PlayerMovement : MonoBehaviour
 	bool dashujem = false;
 	Vector2 dashorientation;
 	bool invincible = true;
-	Vector2 pozbezi=new Vector2(-1,-1);
-    Vector2 pozjuri = new Vector2(1, 1);
+	Vector2 pozbezi=new Vector2(-10,-5);
+    Vector2 pozjuri = new Vector2(10, 5);
 	public float CD;
 	bool canmovecd = false;
 
@@ -183,6 +183,9 @@ public class PlayerMovement : MonoBehaviour
 		time += Time.fixedDeltaTime;
 		if (CD <= 0)
 		{
+			rolesmovement.revv = false;
+			reversedmovement.revv = false;
+			sawbladescript.revv = false;
 			canmovecd = true;
 		}
 
@@ -202,13 +205,16 @@ public class PlayerMovement : MonoBehaviour
 
 	public void ReverseRoles()
 	{
-		rolesmovement.revv = true;
 		putanja.Clear();
 		inputtime.Clear();
         time = 0;
-        CD = 2;
+        CD = 3.4f;
         canmovecd = false;
-        if (isjuring)
+		rolesmovement.revv = true;
+		reversedmovement.revv = true;
+		sawbladescript.revv = true;
+
+		if (isjuring)
 		{
 			ms = bezims;
 			isjuring = false;
