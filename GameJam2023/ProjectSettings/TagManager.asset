@@ -8,6 +8,7 @@ TagManager:
   - saw
   - NeededHeart
   - NeededCog
+  - Wall
   layers:
   - Default
   - TransparentFX

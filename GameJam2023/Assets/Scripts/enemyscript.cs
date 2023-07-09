@@ -4,6 +4,7 @@ using UnityEditor.Build;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using static Unity.Collections.AllocatorManager;
 using static UnityEngine.Tilemaps.Tilemap;
 
 public class enemyscript : MonoBehaviour
@@ -44,6 +45,8 @@ public class enemyscript : MonoBehaviour
     Vector2 dashorientation;
     Vector2 orientation;
     bool canmove = true;
+    public float CD;
+    bool canmovecd = false;
 
     void Start()
     {
@@ -54,7 +57,9 @@ public class enemyscript : MonoBehaviour
         timezainput = 0;
         transform.position = pozbezi;
         invincible = false;
-        health = 10;
+        health = 1;
+        maxhealth = 1;
+        CD = 2;
     }
 
     void FixedUpdate()
@@ -94,7 +99,7 @@ public class enemyscript : MonoBehaviour
             }
             if (orientation != Vector2.zero) lookingDirection = orientation;
             bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
-            if (canmove)
+            if (canmove && canmovecd)
             {
                 if (orientation.x > 0)
                 {
@@ -169,7 +174,12 @@ public class enemyscript : MonoBehaviour
         }
         dashcooldown -= Time.fixedDeltaTime;
         sawcooldown -= Time.fixedDeltaTime;
+        CD-=Time.fixedDeltaTime;
         time += Time.fixedDeltaTime;
+        if (CD <= 0)
+        {
+            canmovecd = true;
+        }
     }
 
     private bool TryMove(Vector2 direction)
@@ -187,6 +197,9 @@ public class enemyscript : MonoBehaviour
 
     public void ReverseRoles()
     {
+        canmovecd = false;
+        CD = 2;
+        health = maxhealth;
         i = 0;
         j = 0;
         bilazamena = true;
@@ -207,7 +220,6 @@ public class enemyscript : MonoBehaviour
             animator.SetBool("juri", false);
             transform.position = pozbezi;
             maxhealth++;
-            health = maxhealth;
         }
         else
         {
@@ -299,7 +311,6 @@ public class enemyscript : MonoBehaviour
             }
             if (health == 0)
             {
-                animator.SetTrigger("umro");
                 print("UMRO enemy");
                 animator.SetBool("umro",true);
             }
@@ -313,7 +324,11 @@ public class enemyscript : MonoBehaviour
 
     private void DeathEnd()
     {
-        Destroy(gameObject);
+        ReverseRoles();
+        player.ReverseRoles();
+        animator.SetBool("umro", false);
+        canmove = true;
+        health = maxhealth;
     }
 
     private void HitEnd()
