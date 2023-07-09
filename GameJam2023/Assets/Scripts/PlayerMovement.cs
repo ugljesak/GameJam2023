@@ -1,35 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	static public float rotationAngle;
-	static public float deltaX, deltaY;
-	public float time;
+	public static bool isjuring = true;
+	public static bool canmove = true;
+	
+	float time;
+	[HideInInspector]
+	public float deltaX, deltaY;
 	Vector2 orientation;
-	Rigidbody2D rb;
-	float ms; // move speed
+	public Vector2 lookingDirection;
+	public Rigidbody2D rb; 
+	public float ms;
 	public float jurims;
 	public float bezims;
-	public Transform bladeSpawner;
+	public GameObject bladeSpawner;
 	public Vector3 bladeOffset;
 	public float bladeDistance;
-	private float dashcooldown;
-	bool right;
-	bool canmove = true;
-	bool isjuring = true;
-	List<Vector2> putanja= new List<Vector2>();
-	List<float> inputtime= new List<float>();
+	float dashcooldown;
+	float sawcooldown;
+	public float dashCD;
+	public float sawCD;
+	public List<Vector2> putanja= new List<Vector2>();
+	public List<float> inputtime= new List<float>();
+	public int brsrafova;
+	public spawnerscript ss;
+	public Animator animator;
+	public ContactFilter2D movementFilter;
+	List<RaycastHit2D> castCollisions= new List<RaycastHit2D>();
+	public float collisionOffset = 0.05f;
+	bool dashujem = false;
+	Vector2 dashorientation;
+	bool invincible = true;
+	int health = 1;
+	Vector2 pozbezi=new Vector2(-1,-1);
+    Vector2 pozjuri = new Vector2(1, 1);
 
-	void Start()
+	public int score=0;
+
+
+    void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		transform.position = Vector3.zero;
-		right = true;
+		animator = GetComponent<Animator>();
+		transform.position = pozjuri;
 		ms = jurims;
 		time = 0;
 		dashcooldown = 0;
+		sawcooldown = 0;
+		putanja.Add(Vector2.zero);
+		score = 0;
 	}
 
 	void Update()
@@ -39,75 +62,237 @@ public class PlayerMovement : MonoBehaviour
 			float moveX = Input.GetAxisRaw("Horizontal");
 			float moveY = Input.GetAxisRaw("Vertical");
 			orientation = new Vector2(moveX, moveY).normalized;
-
-			bladeSpawner.position = transform.position + bladeOffset + new Vector3(orientation.x * bladeDistance, orientation.y * bladeDistance, 0);
-
-			if (moveX < 0) right = false;
-			if (moveX > 0) right = true;
-			if (right == false)
-			{
-				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f));
-			}
-			else
-			{
-				transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f));
-			}
+			if (orientation != Vector2.zero) lookingDirection = new Vector2(moveX, moveY);
+			bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
 		}
 	}
 
 	private void FixedUpdate()
 	{
-		putanja.Add(transform.position);
-		if (canmove)
+		if (isjuring)
 		{
-			rb.velocity = new Vector2(orientation.x * ms, orientation.y * ms);
+			ms = jurims;
+		}
+		if (dashujem)
+		{
+			if (dashcooldown <= dashCD-0.05)
+			{
+				dashujem = false;
+				ms /= 10;
+				invincible = false;	
+			}
+			orientation = dashorientation;
+		}
+		else if (isjuring)
+        {
+            ms = jurims;
+        }
+		else
+		{
+			ms = bezims;
+		}
+        putanja.Add(orientation);
+		
+        if (canmove)
+		{
+            if (orientation.x > 0)
+            {
+                animator.SetBool("isright", true);
+                animator.SetBool("isleft", false);
+            }
+            else if (orientation.x == 0)
+            {
+                animator.SetBool("isright", false);
+                animator.SetBool("isleft", false);
+            }
+            else
+            {
+                animator.SetBool("isleft", true);
+                animator.SetBool("isright", false);
+            }
 
-			deltaY = Input.mousePosition.y - transform.position.y - Screen.height / 2;
-			deltaX = Input.mousePosition.x - transform.position.x - Screen.width / 2;
+            if (orientation.y > 0)
+            {
+                animator.SetBool("isup", true);
+                animator.SetBool("isdown", false);
+            }
+            else if (orientation.y == 0)
+            {
+                animator.SetBool("isup", false);
+                animator.SetBool("isdown", false);
+            }
+            else
+            {
+                animator.SetBool("isdown", true);
+                animator.SetBool("isup", false);
+            }
+            if (orientation != Vector2.zero)
+            {
+                bool success = TryMove(orientation);
+                if (!success && orientation.x != 0)
+                {
+                    success = TryMove(new Vector2(orientation.x, 0));
+
+                }
+                if (!success && orientation.y != 0)
+                {
+                    success = TryMove(new Vector2(0, orientation.y));
+                }
+                animator.SetBool("ismoving", true);
+            }
+            else
+            {
+                animator.SetBool("ismoving", false);
+            }
+
+
+			bladeSpawner.GetComponent<spawnerscript>().playerPosition = transform.position;
 			//Debug.DrawLine(Input.mousePosition +camera.transform.position, camera.transform.position, Color.red, 2, false);
 
 			if (Input.GetKey(KeyCode.Space))
 			{
-				inputtime.Add(time);
 				if (isjuring)
 				{
-					//baci seckalicu
+
+					if (sawcooldown <= 0)
+					{
+						SpawnBlade();
+					}
 				}
 				else
 				{
-					if(dashcooldown<=0) Dash();
+					if (dashcooldown <= 0)
+					{
+						Dash();
+					}
 				}
 			}
 		}
-		print (orientation);
+		//print (orientation);
 		dashcooldown-= Time.fixedDeltaTime;
+		sawcooldown-= Time.fixedDeltaTime;
 		//print(dashcooldown);
-        time += Time.fixedDeltaTime;
-		if (time >= 5)
-		{
-			print("ROLES REVERSED");
-			ReverseRoles();
-			time = 0;
-		}
+		time += Time.fixedDeltaTime;
+
 	}
 
-    private void ReverseRoles()
+    private bool TryMove(Vector2 direction)
     {
+        if (direction == Vector2.zero) return false;
+        int count = rb.Cast(direction, movementFilter, castCollisions, ms * Time.fixedDeltaTime + collisionOffset);
+        if (count == 0)
+        {
+            rb.MovePosition(rb.position + direction * ms * Time.fixedDeltaTime);
+            return true;
+        }
+        return false;
+    }
+
+	public void ReverseRoles()
+	{
+
+		putanja.Clear();
+		inputtime.Clear();
 		if (isjuring)
 		{
 			ms = bezims;
 			isjuring = false;
+			invincible = false;
+			animator.SetBool("juri", false);
+			dashcooldown = dashCD;
+			transform.position = pozbezi;
 		}
 		else
 		{
 			ms = jurims;
 			isjuring = true;
-		}
-    }
+			invincible = true;
+            animator.SetBool("juri", true);
+			sawcooldown = sawCD;
+			transform.position = pozjuri;
+			score++;
+        }
+	}
 
 	private void Dash()
 	{
-		transform.position += (Vector3)orientation;
-		dashcooldown = 3;
+		inputtime.Add(time);
+		dashujem = true;
+		dashorientation = orientation;
+		dashcooldown = dashCD;
+		ms *= 10;
+		invincible = true;
+	}
+
+	private void SpawnBlade()
+	{
+		if (lookingDirection.x == 0)
+		{
+			if (lookingDirection.y > 0)
+			{
+				animator.SetTrigger("sawu");
+			}
+			else
+			{
+				animator.SetTrigger("sawd");
+			}
+		}
+		else if (lookingDirection.x > 0)
+		{
+			if (lookingDirection.y > 0)
+			{
+				animator.SetTrigger("sawur");
+			}
+			else if (lookingDirection.y < 0)
+			{
+                animator.SetTrigger("sawdr");
+            }
+			else
+			{
+                animator.SetTrigger("sawr");
+            }
+		}
+		else
+		{
+            if (lookingDirection.y > 0)
+            {
+                animator.SetTrigger("sawul");
+            }
+            else if (lookingDirection.y < 0)
+            {
+                animator.SetTrigger("sawdl");
+            }
+            else
+            {
+                animator.SetTrigger("sawl");
+            }
+        }
+    }
+
+	private void SawStart()
+	{
+		canmove = false;
+        animator.SetBool("ismoving", false);
+		animator.SetBool("sawblade", true);
+        sawcooldown = sawCD;
+    }
+
+	private void SawEnd()
+	{
+        ss.SpawnBlade();
+        canmove = true;
+		animator.SetBool("sawblade", false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "saw" && !invincible)
+		{
+			health--;
+			if (health == 0)
+			{
+				print("UMRO");
+			}
+		}
 	}
 }
