@@ -9,6 +9,7 @@ public class sawbladescript : MonoBehaviour
     public float speed;
     float time;
     public float lifeTime;
+    public static bool revv = false;
 
     void Start()
     {
@@ -29,7 +30,7 @@ public class sawbladescript : MonoBehaviour
 
     void Update()
     {
-        if(Time.time - time >= lifeTime)
+        if(Time.time - time >= lifeTime || revv == true)
 		{
             Destroy(gameObject);
 		}
