@@ -192,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void ReverseRoles()
 	{
-
+		rolesmovement.revv = true;
 		putanja.Clear();
 		inputtime.Clear();
 		if (isjuring)

@@ -27,7 +27,6 @@ public class finishscript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player") //&& !PlayerMovement.isjuring)
         {
-            print("tusam");
             enemy.ReverseRoles();
             player.ReverseRoles();
         }
