@@ -28,8 +28,15 @@ public class sawbladescript : MonoBehaviour
         time = Time.time;
     }
 
-    
-    private void OnCollisionEnter2D(Collision2D collision)
+	private void Update()
+	{
+		if(revv == true)
+		{
+            Destroy(gameObject);
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
 	{
         if(collision.gameObject.tag == "Wall")
 		{
