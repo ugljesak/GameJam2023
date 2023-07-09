@@ -313,6 +313,8 @@ public class enemyscript : MonoBehaviour
             {
                 print("UMRO enemy");
                 animator.SetBool("umro",true);
+                nutscript.nutCount = 0;
+                nutscript.maxNut++;
             }
         }
     }
