@@ -37,8 +37,8 @@ public class PlayerMovement : MonoBehaviour
 	bool dashujem = false;
 	Vector2 dashorientation;
 	bool invincible = true;
-	Vector2 pozbezi=new Vector2(-1,-1);
-    Vector2 pozjuri = new Vector2(1, 1);
+	Vector2 pozbezi=new Vector2(-10,-5);
+    Vector2 pozjuri = new Vector2(10, 5);
 	public float CD;
 	bool canmovecd = false;
 
