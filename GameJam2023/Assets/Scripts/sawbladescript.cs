@@ -37,9 +37,9 @@ public class sawbladescript : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-
         if(collision.gameObject.tag == "Wall")
 		{
+            print("FEF");
             gameObject.GetComponent<AudioSource>().Play();
             currentVelocity = rb.velocity;
 		}
