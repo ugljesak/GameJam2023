@@ -64,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		print(health);
 		if (dashujem)
 		{
 			if (dashcooldown <= 1.9)
