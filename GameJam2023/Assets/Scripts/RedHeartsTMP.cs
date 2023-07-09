@@ -37,7 +37,7 @@ public class RedHeartsTMP : MonoBehaviour
             Increase++;
             CurrentPickUps = 0;
             MyTextElement.text = "0/" + (StartingHp + Increase - 1).ToString();
-            MyTextElement.color = Color.blue;
+            MyTextElement.color = Color.grey;
             CurrentHp = 1; MaxHp = 1;
             IsChangedToRun = false;
             neededScriptHeart.RedHeartDisappear();
@@ -48,7 +48,7 @@ public class RedHeartsTMP : MonoBehaviour
             CurrentHp = StartingHp + Increase;
             MaxHp = CurrentHp;
             MyTextElement.text = CurrentHp.ToString() + "/" + MaxHp.ToString();
-            MyTextElement.color = Color.red;
+            MyTextElement.color = new Color(1f, 0.38f, 0.38f, 1f);
             IsChangedToShoot = false;
             neededScriptHeart.RedHeartAppear();
             neededScriptCog.CogDisappear(); 
