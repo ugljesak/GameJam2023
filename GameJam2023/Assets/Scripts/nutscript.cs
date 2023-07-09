@@ -16,6 +16,7 @@ public class nutscript : MonoBehaviour
 		print("UVACEN SI BATO BRE");
 		if(collision.gameObject.tag == "Player")
 		{
+			gameObject.GetComponent<AudioSource>().Play();
 			nutCount++;
 			transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
 		}

@@ -35,14 +35,16 @@ public class sawbladescript : MonoBehaviour
 		}
     }
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if(collision.gameObject.tag == "Wall")
+
+        if(collision.gameObject.tag == "Wall")
 		{
+            gameObject.GetComponent<AudioSource>().Play();
             currentVelocity = rb.velocity;
 		}
 	}
-	private void OnTriggerExit2D(Collider2D collision)
+	private void OnCollisionExit2D(Collision2D collision)
 	{
         if (collision.gameObject.tag == "Wall")
         {

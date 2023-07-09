@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour
 {
 	public static bool isjuring = true;
 	public static bool canmove = true;
-	
+	public static int health = 1;
+	public static int score = 0;
+
 	float time;
 	[HideInInspector]
 	public float deltaX, deltaY;
@@ -38,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 pozbezi=new Vector2(-1,-1);
     Vector2 pozjuri = new Vector2(1, 1);
 
-	public int score=0;
 
 
     void Start()
@@ -279,6 +280,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("ismoving", false);
 		animator.SetBool("sawblade", true);
         sawcooldown = sawCD;
+		gameObject.GetComponent<AudioSource>().Play();
     }
 
 	private void SawEnd()
@@ -295,8 +297,8 @@ public class PlayerMovement : MonoBehaviour
 			health--;
 			if (health == 0)
 			{
-				animator.SetTrigger("umro");
-				print("UMRO player"); //radi
+				animator.SetBool("umro",true);
+				print("UMRO player");
 			}
 		}
 	}
