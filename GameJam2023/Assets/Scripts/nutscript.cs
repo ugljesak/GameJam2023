@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class nutscript : MonoBehaviour
 {
-	static int nutCount; 
+	public static int nutCount; 
 
     void Start()
     {

@@ -8,4 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ugos.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/DodosMenu.unity
+    guid: 85a60a746d7310d47a528d379681a581
+  - enabled: 1
+    path: Assets/Scenes/Map1.unity
+    guid: 9dd32c7b7a00b404a80a5f72154cb32f
+  - enabled: 1
+    path: Assets/Scenes/Map2.unity
+    guid: f47fe175349b01449943ce8511614a04
+  - enabled: 1
+    path: Assets/Scenes/Map3.unity
+    guid: a17d2ed899e8ac2449f0515c1cfe5c85
+  - enabled: 1
+    path: Assets/Scenes/MapScene.unity
+    guid: 6826c77be4f2bd94b824ed06d8b09ad2
   m_configObjects: {}

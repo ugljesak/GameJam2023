@@ -7,14 +7,17 @@ public class Map1ButtonScript : MonoBehaviour
 {
     public void ButtonMap1()
     {
-        SceneManager.LoadScene("Map1");
+        gameObject.GetComponent<AudioSource>().Play();
+        SceneManager.LoadSceneAsync("Map1");
     }
     public void ButtonMap2()
     {
-        SceneManager.LoadScene("Map2");
+        gameObject.GetComponent<AudioSource>().Play();
+        SceneManager.LoadSceneAsync("Map2");
     }
     public void ButtonMap3()
     {
-        SceneManager.LoadScene("Map3");
+        gameObject.GetComponent<AudioSource>().Play();
+        SceneManager.LoadSceneAsync("Map3");
     }
 }

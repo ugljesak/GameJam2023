@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-	public static bool isjuring = true;
+	public static bool isjuring;
 	public static bool canmove = true;
 	public static int health = 1;
 	public static int score = 0;
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
-		transform.position = pozjuri;
+		transform.position = pozbezi;
 		ms = jurims;
 		time = 0;
 		dashcooldown = 0;
@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 		invincible = true;
 		health = 10;
 		CD = 2;
+		isjuring = false;
 	}
 
 	void Update()
