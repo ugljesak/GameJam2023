@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour
 {
 	public static bool isjuring = true;
 	public static bool canmove = true;
-	
+	public static int health;
+	public static int score = 0;
+
 	float time;
 	[HideInInspector]
 	public float deltaX, deltaY;
@@ -38,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 pozbezi=new Vector2(-1,-1);
     Vector2 pozjuri = new Vector2(1, 1);
 
-	public int score=0;
 
 
     void Start()
