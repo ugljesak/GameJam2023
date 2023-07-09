@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 	public static bool canmove = true;
 	public static int health = 1;
 	public static int score = 0;
+	static public bool zavrsio = false;
 
 	float time;
 	[HideInInspector]
@@ -43,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject reverseSound;
 	public GameObject deathSound;
 	public GameObject dashSound;
-
+	
 
     void Start()
 	{
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
 		invincible = true;
 		health = 10;
 		isjuring = false;
+		canmove = true;
 	}
 
 	void Update()
@@ -184,13 +186,18 @@ public class PlayerMovement : MonoBehaviour
 		dashcooldown-= Time.fixedDeltaTime;
 		sawcooldown-= Time.fixedDeltaTime;
 		CD -= Time.fixedDeltaTime;
+		if(CD <= 1.5f)
+		{
+			sawbladescript.revv = false;
+		}
 		//print(dashcooldown);
 		time += Time.fixedDeltaTime;
-		if (CD <= 0)
+		if (CD <= 0 || zavrsio == true)
 		{
 			rolesmovement.revv = false;
 			reversedmovement.revv = false;
 			sawbladescript.revv = false;
+			zavrsio = false;
 		}
 
 	}
@@ -213,7 +220,7 @@ public class PlayerMovement : MonoBehaviour
 		putanja.Clear();
 		inputtime.Clear();
         time = 0;
-        CD = 3.4f;
+        CD = 2.5f;
 		rolesmovement.revv = true;
 		reversedmovement.revv = true;
 		sawbladescript.revv = true;
@@ -335,5 +342,6 @@ public class PlayerMovement : MonoBehaviour
 	private void DeathEnd()
 	{
 		Destroy(gameObject);
+		canmove = true;
 	}
 }

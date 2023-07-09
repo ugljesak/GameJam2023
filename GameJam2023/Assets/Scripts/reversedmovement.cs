@@ -8,7 +8,7 @@ public class reversedmovement : MonoBehaviour
     public Vector3 startPosition;
     public Vector3 endPosition;
     Vector3 mposition = new Vector3(0.0f, -2.0f, -1.0f);
-    public float speed = 15.0f;
+    public float speed = 13.0f;
     bool pola = false;
     bool zavrsio = false;
     float step = 0;
@@ -17,7 +17,7 @@ public class reversedmovement : MonoBehaviour
     void Start()
     {
         transform.position = startPosition;
-        speed = 15.0f;
+        speed = 13.0f;
     }
 
     private void Update()
@@ -25,7 +25,7 @@ public class reversedmovement : MonoBehaviour
         if (revv == false)
         {
             transform.position = startPosition;
-            speed = 15.0f;
+            speed = 13.0f;
             return;
         }
 
@@ -61,6 +61,9 @@ public class reversedmovement : MonoBehaviour
         }
         if (zavrsio == true)
         {
+            revv = false;
+            PlayerMovement.zavrsio = true;
+            sawbladescript.revv = false;
             transform.position = startPosition + endPosition + new Vector3(100.0f, -100.0f, 1.0f);
             zavrsio = false;
         }
