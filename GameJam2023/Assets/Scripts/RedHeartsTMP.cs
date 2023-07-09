@@ -20,7 +20,7 @@ public class RedHeartsTMP : MonoBehaviour
     {
         MaxHp = StartingHp;
         CurrentHp = MaxHp;
-        MyTextElement.text = CurrentHp.ToString() + "/" + MaxHp.ToString();
+        MyTextElement.text = "0/1";
         neededScriptHeart = GameObject.FindWithTag("NeededHeart").GetComponent<HeartRedScript>();
         neededScriptCog = GameObject.FindWithTag("NeededCog").GetComponent<CogImage>();
     }
@@ -30,13 +30,13 @@ public class RedHeartsTMP : MonoBehaviour
 
 
         CurrentPickUps = nutscript.nutCount;
-        MyTextElement.text = CurrentPickUps + "/" + (StartingHp + Increase - 1).ToString();
+        MyTextElement.text = CurrentPickUps + "/" + (nutscript.maxNut).ToString();
             
         if(!PlayerMovement.isjuring)
         {
             Increase++;
             CurrentPickUps = 0;
-            MyTextElement.text = "0/" + (StartingHp + Increase - 1).ToString();
+            MyTextElement.text = "0/" + (nutscript.maxNut).ToString();
             MyTextElement.color = Color.black;
             CurrentHp = 1; MaxHp = 1;
             IsChangedToRun = false;
