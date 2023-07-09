@@ -15,8 +15,7 @@ public class DeathScreenScript : MonoBehaviour
     }
     public void RestartButton() {
         gameObject.GetComponent<AudioSource>().Play();
-        string c = SceneManager.GetActiveScene().name;
-        SceneManager.LoadSceneAsync(c);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void ExitButton()
     {
