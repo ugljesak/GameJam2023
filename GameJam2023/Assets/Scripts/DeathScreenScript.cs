@@ -14,10 +14,12 @@ public class DeathScreenScript : MonoBehaviour
         scorepoints.text = score.ToString();
     }
     public void RestartButton() {
+        gameObject.GetComponent<AudioSource>().Play();
         SceneManager.LoadScene("Dodos"); //staviti koja scena je igrica
     }
     public void ExitButton()
     {
+        gameObject.GetComponent<AudioSource>().Play();
         SceneManager.LoadScene("DodosMenu"); //
     }
 }
