@@ -62,6 +62,8 @@ public class rolesmovement : MonoBehaviour
         if (zavrsio == true)
 		{
             revv = false;
+            PlayerMovement.zavrsio = true;
+            sawbladescript.revv = false;
             transform.position = startPosition + endPosition + new Vector3(-100.0f, 100.0f, 1.0f);
             zavrsio = false;
         }
