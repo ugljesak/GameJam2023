@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Build;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
+using static UnityEngine.Tilemaps.Tilemap;
 
 public class enemyscript : MonoBehaviour
 {
@@ -10,15 +12,38 @@ public class enemyscript : MonoBehaviour
     public List<Vector2> putanja;
     public List<float> inputtime;
     float time;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     public float ms;
     public float jurims;
     public float bezims;
-    private bool isjuring = false;
+    public bool isjuring = false;
+    public Animator animator;
     int i = 0;
     int j = 0;
     bool bilazamena = false;
     float timezainput;
+    bool invincible = false;
+    int maxhealth = 1;
+    int health = 1;
+    Vector3 pozbezi = new Vector3(-1, -1, 1);
+    Vector3 pozjuri = new Vector3(1, 1, 1);
+
+    public Vector2 lookingDirection;
+    public GameObject bladeSpawner;
+    public Vector3 bladeOffset;
+    public float bladeDistance;
+    float dashcooldown;
+    float sawcooldown;
+    public float dashCD;
+    public float sawCD;
+    public spawnerscript ss;
+    public ContactFilter2D movementFilter;
+    List<RaycastHit2D> castCollisions = new List<RaycastHit2D>();
+    public float collisionOffset = 0.05f;
+    bool dashujem = false;
+    Vector2 dashorientation;
+    Vector2 orientation;
+    bool canmove = true;
 
     void Start()
     {
@@ -27,48 +52,136 @@ public class enemyscript : MonoBehaviour
         isjuring = false;
         time = 0;
         timezainput = 0;
-        transform.position = Vector3.zero; 
+        transform.position = pozbezi;
+        invincible = false;
+        health = 1;
     }
 
     void FixedUpdate()
     {
         if (bilazamena)
         {
-            Move();
-            if (j<inputtime.Count)
+            if (isjuring)
             {
-                if (timezainput >= inputtime[j])
+                ms = jurims;
+            }
+            if (dashujem)
+            {
+                if (dashcooldown <= dashCD - 0.05)
                 {
-                    UradiInput();
-                    timezainput = 0;
-                    j++;
+                    dashujem = false;
+                    ms /= 10;
+                    invincible = false;
+                }
+                orientation = dashorientation;
+            }
+            else if (isjuring)
+            {
+                ms = jurims;
+            }
+            else
+            {
+                ms = bezims;
+            }
+            if (i < putanja.Count)
+            {
+                orientation = putanja[i];
+                i++;
+            }
+            else
+            {
+                orientation =new Vector2(0, 0);
+            }
+            if (orientation != Vector2.zero) lookingDirection = orientation;
+            bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
+            if (canmove)
+            {
+                if (orientation.x > 0)
+                {
+                    animator.SetBool("isright", true);
+                    animator.SetBool("isleft", false);
+                }
+                else if (orientation.x == 0)
+                {
+                    animator.SetBool("isright", false);
+                    animator.SetBool("isleft", false);
+                }
+                else
+                {
+                    animator.SetBool("isleft", true);
+                    animator.SetBool("isright", false);
+                }
+
+                if (orientation.y > 0)
+                {
+                    animator.SetBool("isup", true);
+                    animator.SetBool("isdown", false);
+                }
+                else if (orientation.y == 0)
+                {
+                    animator.SetBool("isup", false);
+                    animator.SetBool("isdown", false);
+                }
+                else
+                {
+                    animator.SetBool("isdown", true);
+                    animator.SetBool("isup", false);
+                }
+                if (orientation != Vector2.zero)
+                {
+                    bool success = TryMove(orientation);
+                    if (!success && orientation.x != 0)
+                    {
+                        success = TryMove(new Vector2(orientation.x, 0));
+
+                    }
+                    if (!success && orientation.y != 0)
+                    {
+                        success = TryMove(new Vector2(0, orientation.y));
+                    }
+                    animator.SetBool("ismoving", true);
+                }
+                else
+                {
+                    animator.SetBool("ismoving", false);
+                }
+
+
+                bladeSpawner.GetComponent<spawnerscript>().playerPosition = transform.position;
+
+
+                if (j < inputtime.Count)
+                {
+                    if (time >= inputtime[j])
+                    {
+                        j++;
+                        if (isjuring)
+                        {
+                            SpawnBlade();
+                        }
+                        else
+                        {
+                            Dash();
+                        }
+                    }
                 }
             }
         }
+        dashcooldown -= Time.fixedDeltaTime;
+        sawcooldown -= Time.fixedDeltaTime;
         time += Time.fixedDeltaTime;
-        timezainput += Time.fixedDeltaTime;
     }
-    
-    private void Move()
+
+    private bool TryMove(Vector2 direction)
     {
-        if (i < putanja.Count)
+        if (direction == Vector2.zero) return false;
+        int count = rb.Cast(direction, movementFilter, castCollisions, ms * Time.fixedDeltaTime + collisionOffset);
+        if (count == 0)
         {
-            rb.velocity = putanja[i] * ms;
-            i++;
-            
+            rb.MovePosition(rb.position + direction * ms * Time.fixedDeltaTime);
+            return true;
         }
-    }
-   
-    private void UradiInput()
-    {
-        if (isjuring)
-        {
-            //baci seckalicu
-        }
-        else
-        {
-            Dash();
-        }
+        return false;
     }
 
 
@@ -85,20 +198,103 @@ public class enemyscript : MonoBehaviour
         {
             inputtime = new List<float>(player.GetComponent<PlayerMovement>().inputtime);
         }
+        time = 0;
         if (isjuring)
         {
             ms = bezims;
             isjuring = false;
+            invincible = false;
+            animator.SetBool("juri", false);
+            transform.position = pozbezi;
         }
         else
         {
             ms = jurims;
             isjuring = true;
+            invincible = true;
+            animator.SetBool("juri", true);
+            transform.position = pozjuri;
         }
     }
 
     private void Dash()
     {
-        //samo animacija
+        dashujem = true;
+        dashorientation = orientation;
+        dashcooldown = dashCD;
+        ms *= 10;
+        invincible = true;
+    }
+
+    private void SpawnBlade()
+    {
+        if (lookingDirection.x == 0)
+        {
+            if (lookingDirection.y > 0)
+            {
+                animator.SetTrigger("sawu");
+            }
+            else
+            {
+                animator.SetTrigger("sawd");
+            }
+        }
+        else if (lookingDirection.x > 0)
+        {
+            if (lookingDirection.y > 0)
+            {
+                animator.SetTrigger("sawur");
+            }
+            else if (lookingDirection.y < 0)
+            {
+                animator.SetTrigger("sawdr");
+            }
+            else
+            {
+                animator.SetTrigger("sawr");
+            }
+        }
+        else
+        {
+            if (lookingDirection.y > 0)
+            {
+                animator.SetTrigger("sawul");
+            }
+            else if (lookingDirection.y < 0)
+            {
+                animator.SetTrigger("sawdl");
+            }
+            else
+            {
+                animator.SetTrigger("sawl");
+            }
+        }
+    }
+
+    private void SawStart()
+    {
+        canmove = false;
+        animator.SetBool("ismoving", false);
+        animator.SetBool("sawblade", true);
+        sawcooldown = sawCD;
+    }
+
+    private void SawEnd()
+    {
+        ss.SpawnBlade();
+        canmove = true;
+        animator.SetBool("sawblade", false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "saw" && !invincible)
+        {
+            health--;
+            if (health == 0)
+            {
+                print("UMRO enemy");
+            }
+        }
     }
 }

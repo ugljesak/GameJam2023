@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 25484b2cd6062334eacf6e6a354b00f6
+guid: 4df5325629851cf499bd55bd53f31fab
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: run_up_scared_red_0
+      name: hit_red_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,18 +124,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 740ed5adabd8a43448b2d3518759aa2d
-      internalID: -57107475
+      spriteID: 5dc0aff7e5814dc47b927e25b31acc3d
+      internalID: -2045010081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: run_up_scared_red_1
+      name: hit_red_1
       rect:
         serializedVersion: 2
         x: 33
-        y: 1
+        y: 0
         width: 32
         height: 28
       alignment: 0
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32392fb1098836e4987e8e1268a8b6c4
-      internalID: 2058918396
+      spriteID: 03cfb5c489b3e7c49bee903403bc1c1c
+      internalID: 2060926477
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: run_up_scared_red_2
+      name: hit_red_2
       rect:
         serializedVersion: 2
         x: 66
@@ -166,8 +166,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 196c7f499458ec34691d84b422618d01
-      internalID: -103429432
+      spriteID: 725d12e3956ba3c49b75008fe7a99af0
+      internalID: 905708249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit_red_3
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 0
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e14ef840eae450e4faf3eb1243ecab86
+      internalID: -1857065521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit_red_4
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 0
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52366bca73b0a5345816024e83e9096d
+      internalID: 1322719911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit_red_5
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4b58be3fd9cbd64080eb414255033af
+      internalID: -1724638526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hit_red_6
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 0
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58710d2fccdabe24690df4c0be21b70c
+      internalID: 1439384920
       vertices: []
       indices: 
       edges: []
@@ -183,9 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      run_up_scared_red_0: -57107475
-      run_up_scared_red_1: 2058918396
-      run_up_scared_red_2: -103429432
+      hit_red_0: -2045010081
+      hit_red_1: 2060926477
+      hit_red_2: 905708249
+      hit_red_3: -1857065521
+      hit_red_4: 1322719911
+      hit_red_5: -1724638526
+      hit_red_6: 1439384920
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

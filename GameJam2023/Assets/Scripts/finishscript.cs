@@ -31,5 +31,9 @@ public class finishscript : MonoBehaviour
             enemy.ReverseRoles();
             player.ReverseRoles();
         }
+        if(collision.gameObject.tag=="enemy" && !enemy.isjuring)
+        {
+            print("izgubio si");
+        }
     }
 }

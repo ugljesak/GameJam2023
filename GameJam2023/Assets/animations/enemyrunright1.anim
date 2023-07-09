@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: playerblehdl
+  m_Name: enemyrunright1
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,21 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -41111117, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
+      value: {fileID: -1722499653, guid: 9ddca80248c998941b081bb6cac70da9, type: 3}
+    - time: 0.05
+      value: {fileID: 1268039080, guid: 9ddca80248c998941b081bb6cac70da9, type: 3}
     - time: 0.1
-      value: {fileID: 737725909, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
-    - time: 0.2
-      value: {fileID: -781322361, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
-    - time: 0.3
-      value: {fileID: -826776249, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
-    - time: 0.4
-      value: {fileID: -1357722586, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
+      value: {fileID: 1246891873, guid: 9ddca80248c998941b081bb6cac70da9, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 10
+  m_SampleRate: 20
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -52,22 +48,20 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -41111117, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
-    - {fileID: 737725909, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
-    - {fileID: -781322361, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
-    - {fileID: -826776249, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
-    - {fileID: -1357722586, guid: 2fecaa82da1a22d48b1b5b1e98bb276f, type: 3}
+    - {fileID: -1722499653, guid: 9ddca80248c998941b081bb6cac70da9, type: 3}
+    - {fileID: 1268039080, guid: 9ddca80248c998941b081bb6cac70da9, type: 3}
+    - {fileID: 1246891873, guid: 9ddca80248c998941b081bb6cac70da9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.15
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -81,18 +75,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0
-    functionName: SawStart
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.4
-    functionName: SawEnd
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []
