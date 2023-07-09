@@ -16,11 +16,11 @@ public class DeathScreenScript : MonoBehaviour
     public void RestartButton() {
         gameObject.GetComponent<AudioSource>().Play();
         string c = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(c);
+        SceneManager.LoadSceneAsync(c);
     }
     public void ExitButton()
     {
         gameObject.GetComponent<AudioSource>().Play();
-        SceneManager.LoadScene("DodosMenu"); //
+        SceneManager.LoadSceneAsync("DodosMenu"); //
     }
 }
