@@ -54,7 +54,8 @@ public class enemyscript : MonoBehaviour
         timezainput = 0;
         transform.position = pozbezi;
         invincible = false;
-        health = 10;
+        health = 1;
+        maxhealth = 1;
     }
 
     void FixedUpdate()
@@ -187,6 +188,7 @@ public class enemyscript : MonoBehaviour
 
     public void ReverseRoles()
     {
+        health = maxhealth;
         i = 0;
         j = 0;
         bilazamena = true;
@@ -207,7 +209,6 @@ public class enemyscript : MonoBehaviour
             animator.SetBool("juri", false);
             transform.position = pozbezi;
             maxhealth++;
-            health = maxhealth;
         }
         else
         {
@@ -299,7 +300,6 @@ public class enemyscript : MonoBehaviour
             }
             if (health == 0)
             {
-                animator.SetTrigger("umro");
                 print("UMRO enemy");
                 animator.SetBool("umro",true);
             }
@@ -313,7 +313,10 @@ public class enemyscript : MonoBehaviour
 
     private void DeathEnd()
     {
-        Destroy(gameObject);
+        ReverseRoles();
+        player.ReverseRoles();
+        animator.SetBool("umro", false);
+        canmove = true;
     }
 
     private void HitEnd()
