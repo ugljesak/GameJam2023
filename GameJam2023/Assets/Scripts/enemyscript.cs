@@ -46,7 +46,6 @@ public class enemyscript : MonoBehaviour
     Vector2 orientation;
     bool canmove = true;
     public float CD;
-    bool canmovecd = false;
 
     void Start()
     {
@@ -99,7 +98,7 @@ public class enemyscript : MonoBehaviour
             }
             if (orientation != Vector2.zero) lookingDirection = orientation;
             bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
-            if (canmove && canmovecd)
+            if (canmove)
             {
                 if (orientation.x > 0)
                 {
@@ -176,10 +175,6 @@ public class enemyscript : MonoBehaviour
         sawcooldown -= Time.fixedDeltaTime;
         CD-=Time.fixedDeltaTime;
         time += Time.fixedDeltaTime;
-        if (CD <= 0)
-        {
-            canmovecd = true;
-        }
     }
 
     private bool TryMove(Vector2 direction)
@@ -197,7 +192,6 @@ public class enemyscript : MonoBehaviour
 
     public void ReverseRoles()
     {
-        canmovecd = false;
         CD = 2;
         health = maxhealth;
         i = 0;
