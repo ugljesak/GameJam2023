@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 	public float CD;
 	bool canmovecd = false;
 	public GameObject reverseSound;
+	public GameObject deathSound;
 	public GameObject dashSound;
 
 
@@ -99,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			ms = bezims;
 		}
-        putanja.Add(orientation);
+        if(canmovecd == true) putanja.Add(orientation);
 		
         if (canmove && canmovecd)
 		{
@@ -241,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
 	private void Dash()
 	{
 		dashSound.GetComponent<AudioSource>().Play();
-		inputtime.Add(time);
+		if(canmovecd == true) inputtime.Add(time);
 		dashujem = true;
 		dashorientation = orientation;
 		dashcooldown = dashCD;
@@ -251,7 +252,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void SpawnBlade()
 	{
-		inputtime.Add(time);
+		if(canmovecd == true) inputtime.Add(time);
 		if (lookingDirection.x == 0)
 		{
 			if (lookingDirection.y > 0)
@@ -316,9 +317,10 @@ public class PlayerMovement : MonoBehaviour
 		if (collision.gameObject.tag == "saw" && !invincible)
 		{
 			health--;
-			if (health == 0)
+			if (health <= 0)
 			{
 				animator.SetBool("umro",true);
+				deathSound.GetComponent<AudioSource>().Play();
 				print("UMRO player");
 			}
 		}
