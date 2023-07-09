@@ -293,8 +293,19 @@ public class enemyscript : MonoBehaviour
             health--;
             if (health == 0)
             {
+                animator.SetTrigger("umro");
                 print("UMRO enemy");
             }
         }
+    }
+
+    private void DeathStart()
+    {
+        canmove = false;
+    }
+
+    private void DeathEnd()
+    {
+        Destroy(gameObject);
     }
 }

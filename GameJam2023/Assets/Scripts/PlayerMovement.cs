@@ -295,8 +295,19 @@ public class PlayerMovement : MonoBehaviour
 			health--;
 			if (health == 0)
 			{
+				animator.SetTrigger("umro");
 				print("UMRO player");
 			}
 		}
+	}
+
+	private void DeathStart()
+	{
+		canmove = false;
+	}
+
+	private void DeathEnd()
+	{
+		Destroy(gameObject);
 	}
 }
