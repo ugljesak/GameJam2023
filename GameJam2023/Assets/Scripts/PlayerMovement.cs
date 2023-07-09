@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
 	bool invincible = true;
 	Vector2 pozbezi=new Vector2(-1,-1);
     Vector2 pozjuri = new Vector2(1, 1);
+	public float CD;
+	bool canmovecd = false;
 
 
 
@@ -54,12 +56,13 @@ public class PlayerMovement : MonoBehaviour
 		putanja.Add(Vector2.zero);
 		score = 0;
 		invincible = true;
-		health = 1;
+		health = 10;
+		CD = 2;
 	}
 
 	void Update()
 	{
-		if (canmove)
+		if (canmove && canmovecd)
 		{
 			float moveX = Input.GetAxisRaw("Horizontal");
 			float moveY = Input.GetAxisRaw("Vertical");
@@ -71,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		
 		if (isjuring)
 		{
 			ms = jurims;
@@ -95,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
 		}
         putanja.Add(orientation);
 		
-        if (canmove)
+        if (canmove && canmovecd)
 		{
             if (orientation.x > 0)
             {
@@ -173,8 +177,13 @@ public class PlayerMovement : MonoBehaviour
 		//print (orientation);
 		dashcooldown-= Time.fixedDeltaTime;
 		sawcooldown-= Time.fixedDeltaTime;
+		CD -= Time.fixedDeltaTime;
 		//print(dashcooldown);
 		time += Time.fixedDeltaTime;
+		if (CD <= 0)
+		{
+			canmovecd = true;
+		}
 
 	}
 
@@ -195,7 +204,10 @@ public class PlayerMovement : MonoBehaviour
 
 		putanja.Clear();
 		inputtime.Clear();
-		if (isjuring)
+        time = 0;
+        CD = 2;
+        canmovecd = false;
+        if (isjuring)
 		{
 			ms = bezims;
 			isjuring = false;
@@ -215,7 +227,6 @@ public class PlayerMovement : MonoBehaviour
 			transform.position = pozjuri;
 			score++;
         }
-		time = 0;
 	}
 
 	private void Dash()
