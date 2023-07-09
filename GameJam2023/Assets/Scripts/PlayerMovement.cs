@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
 	bool dashujem = false;
 	Vector2 dashorientation;
 	bool invincible = true;
-	int health = 1;
 	Vector2 pozbezi=new Vector2(-1,-1);
     Vector2 pozjuri = new Vector2(1, 1);
 
@@ -203,6 +202,7 @@ public class PlayerMovement : MonoBehaviour
 			animator.SetBool("juri", false);
 			dashcooldown = dashCD;
 			transform.position = pozbezi;
+			health = 1;
 		}
 		else
 		{
@@ -295,8 +295,19 @@ public class PlayerMovement : MonoBehaviour
 			health--;
 			if (health == 0)
 			{
-				print("UMRO player");
+				animator.SetTrigger("umro");
+				print("UMRO player"); //radi
 			}
 		}
+	}
+
+	private void DeathStart()
+	{
+		canmove = false;
+	}
+
+	private void DeathEnd()
+	{
+		Destroy(gameObject);
 	}
 }
