@@ -64,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		print(isjuring);
 		if (dashujem)
 		{
 			if (dashcooldown <= 1.9)
@@ -187,13 +188,15 @@ public class PlayerMovement : MonoBehaviour
 			ms = bezims;
 			isjuring = false;
 			invincible = false;
+			animator.SetBool("juri", false);
 		}
 		else
 		{
 			ms = jurims;
 			isjuring = true;
 			invincible = true;
-		}
+            animator.SetBool("juri", true);
+        }
 	}
 
 	private void Dash()
@@ -255,6 +258,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		canmove = false;
         animator.SetBool("ismoving", false);
+		animator.SetBool("sawblade", true);
     }
 
 	private void SawEnd()
@@ -262,6 +266,7 @@ public class PlayerMovement : MonoBehaviour
         ss.SpawnBlade();
         sawcooldown = sawCD;
         canmove = true;
+		animator.SetBool("sawblade", false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
