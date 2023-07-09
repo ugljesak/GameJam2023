@@ -15,7 +15,8 @@ public class DeathScreenScript : MonoBehaviour
     }
     public void RestartButton() {
         gameObject.GetComponent<AudioSource>().Play();
-        SceneManager.LoadScene("Dodos"); //staviti koja scena je igrica
+        string c = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(c);
     }
     public void ExitButton()
     {
