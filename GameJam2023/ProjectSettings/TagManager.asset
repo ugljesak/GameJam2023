@@ -6,6 +6,8 @@ TagManager:
   tags:
   - enemy
   - saw
+  - NeededHeart
+  - NeededCog
   layers:
   - Default
   - TransparentFX
