@@ -53,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
 		sawcooldown = 0;
 		putanja.Add(Vector2.zero);
 		score = 0;
+		invincible = true;
+		health = 1;
 	}
 
 	void Update()
@@ -62,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 			float moveX = Input.GetAxisRaw("Horizontal");
 			float moveY = Input.GetAxisRaw("Vertical");
 			orientation = new Vector2(moveX, moveY).normalized;
-			if (orientation != Vector2.zero) lookingDirection = new Vector2(moveX, moveY);
+			if (orientation != Vector2.zero) lookingDirection = new Vector2(moveX, moveY).normalized;
 			bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
 		}
 	}
@@ -212,6 +214,7 @@ public class PlayerMovement : MonoBehaviour
 			transform.position = pozjuri;
 			score++;
         }
+		time = 0;
 	}
 
 	private void Dash()
@@ -226,6 +229,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void SpawnBlade()
 	{
+		inputtime.Add(time);
 		if (lookingDirection.x == 0)
 		{
 			if (lookingDirection.y > 0)
@@ -291,7 +295,7 @@ public class PlayerMovement : MonoBehaviour
 			health--;
 			if (health == 0)
 			{
-				print("UMRO");
+				print("UMRO player");
 			}
 		}
 	}
