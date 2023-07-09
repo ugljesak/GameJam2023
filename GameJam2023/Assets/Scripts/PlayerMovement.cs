@@ -41,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 pozjuri = new Vector2(10, 5);
 	public float CD;
 	bool canmovecd = false;
-
+	public GameObject reverseSound;
+	public GameObject dashSound;
 
 
     void Start()
@@ -57,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 		score = 0;
 		invincible = true;
 		health = 10;
-		CD = 2;
+		CD = 0.3f;
 		isjuring = false;
 	}
 
@@ -205,6 +206,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void ReverseRoles()
 	{
+		reverseSound.GetComponent<AudioSource>().Play();
 		putanja.Clear();
 		inputtime.Clear();
         time = 0;
@@ -238,6 +240,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Dash()
 	{
+		dashSound.GetComponent<AudioSource>().Play();
 		inputtime.Add(time);
 		dashujem = true;
 		dashorientation = orientation;
