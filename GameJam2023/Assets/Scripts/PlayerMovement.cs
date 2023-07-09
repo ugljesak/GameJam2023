@@ -33,7 +33,10 @@ public class PlayerMovement : MonoBehaviour
 	public float collisionOffset = 0.05f;
 	bool dashujem = false;
 	Vector2 dashorientation;
-	bool invincible = false;
+	bool invincible = true;
+	int health = 1;
+
+
 
 	void Start()
 	{
@@ -61,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		print(health);
 		if (dashujem)
 		{
 			if (dashcooldown <= 1.9)
@@ -183,11 +187,13 @@ public class PlayerMovement : MonoBehaviour
 		{
 			ms = bezims;
 			isjuring = false;
+			invincible = false;
 		}
 		else
 		{
 			ms = jurims;
 			isjuring = true;
+			invincible = true;
 		}
 	}
 
@@ -258,4 +264,16 @@ public class PlayerMovement : MonoBehaviour
         sawcooldown = sawCD;
         canmove = true;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "saw" && !invincible)
+		{
+			health--;
+			if (health == 0)
+			{
+				print("UMRO");
+			}
+		}
+	}
 }
