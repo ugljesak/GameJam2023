@@ -34,10 +34,9 @@ public class sawbladescript : MonoBehaviour
             Destroy(gameObject);
 		}
     }
-
-	private void OnCollisionEnter2D(Collision2D collision)
+    
+    private void OnCollisionEnter2D(Collision2D collision)
 	{
-
         if(collision.gameObject.tag == "Wall")
 		{
             gameObject.GetComponent<AudioSource>().Play();
