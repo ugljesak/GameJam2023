@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 	public static bool isjuring = true;
 	public static bool canmove = true;
-	public static int health;
+	public static int health = 1;
 	public static int score = 0;
 
 	float time;
@@ -280,6 +280,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("ismoving", false);
 		animator.SetBool("sawblade", true);
         sawcooldown = sawCD;
+		gameObject.GetComponent<AudioSource>().Play();
     }
 
 	private void SawEnd()
