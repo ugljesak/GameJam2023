@@ -54,7 +54,7 @@ public class enemyscript : MonoBehaviour
         timezainput = 0;
         transform.position = pozbezi;
         invincible = false;
-        health = 1;
+        health = 10;
     }
 
     void FixedUpdate()
@@ -293,10 +293,15 @@ public class enemyscript : MonoBehaviour
         if (collision.gameObject.tag == "saw" && !invincible)
         {
             health--;
+            if (health > 0)
+            {
+                animator.SetTrigger("hit");
+            }
             if (health == 0)
             {
                 animator.SetTrigger("umro");
                 print("UMRO enemy");
+                animator.SetBool("umro",true);
             }
         }
     }
@@ -309,5 +314,10 @@ public class enemyscript : MonoBehaviour
     private void DeathEnd()
     {
         Destroy(gameObject);
+    }
+
+    private void HitEnd()
+    {
+        animator.SetBool("hit", false);
     }
 }

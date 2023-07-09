@@ -296,8 +296,8 @@ public class PlayerMovement : MonoBehaviour
 			health--;
 			if (health == 0)
 			{
-				animator.SetTrigger("umro");
-				print("UMRO player"); //radi
+				animator.SetBool("umro",true);
+				print("UMRO player");
 			}
 		}
 	}
