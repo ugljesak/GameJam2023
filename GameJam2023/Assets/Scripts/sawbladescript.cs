@@ -34,7 +34,6 @@ public class sawbladescript : MonoBehaviour
 		if(revv == true && PlayerMovement.zavrsio == false)
 		{
             Destroy(gameObject);
-            revv = false;
 		}
 	}
 
