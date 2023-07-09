@@ -10,16 +10,26 @@ public class nutscript : MonoBehaviour
     void Start()
     {
 		maxNut = 1;
+		nutCount = 0;
     }
 	
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		if(collision.gameObject.tag == "Wall")
+		{
+			transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
+			return;
+		}
 		print("UVACEN SI BATO BRE");
 		if(collision.gameObject.tag == "Player")
 		{
 			gameObject.GetComponent<AudioSource>().Play();
 			nutCount++;
-			if (maxNut > nutCount) transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
+			if (maxNut > nutCount)
+			{
+				transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
+				
+			}
 			else transform.position = new Vector3(100.0f, 100.0f, 0.0f);
 		}
 	}
