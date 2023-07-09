@@ -47,11 +47,6 @@ public class enemyscript : MonoBehaviour
         }
         time += Time.fixedDeltaTime;
         timezainput += Time.fixedDeltaTime;
-        if (time >= 4.97)
-        {
-            print("ROLES REVERSED");
-            ReverseRoles();
-        }
     }
     
     private void Move()
@@ -78,7 +73,7 @@ public class enemyscript : MonoBehaviour
     }
 
 
-    private void ReverseRoles()
+    public void ReverseRoles()
     {
         i = 0;
         j = 0;
@@ -91,7 +86,6 @@ public class enemyscript : MonoBehaviour
         {
             inputtime = new List<float>(player.GetComponent<PlayerMovement>().inputtime);
         }
-        time = 0;
         if (isjuring)
         {
             ms = bezims;

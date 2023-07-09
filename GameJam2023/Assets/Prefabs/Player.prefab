@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5969624088617033732}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,14 +152,14 @@ MonoBehaviour:
   deltaY: 0
   lookingDirection: {x: 0, y: 0}
   rb: {fileID: 5049089922429890028}
-  ms: 0
+  ms: 3.5
   jurims: 3.5
   bezims: 5
   bladeSpawner: {fileID: 688185773480695843, guid: 643760675d313804796b04e367c6f288, type: 3}
   bladeOffset: {x: 0, y: 0, z: 1}
   bladeDistance: 0.8
-  dashCD: 2
-  sawCD: 2
+  dashCD: 0.5
+  sawCD: 0.5
   putanja: []
   inputtime: []
   brsrafova: 0

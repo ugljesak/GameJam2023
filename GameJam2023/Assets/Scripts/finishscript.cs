@@ -5,6 +5,7 @@ using UnityEngine;
 public class finishscript : MonoBehaviour
 {
     public PlayerMovement player;
+    public enemyscript enemy;
     public Collider2D finishcollider;
     public int potrebanbrsrafova;
     void Start()
@@ -19,6 +20,16 @@ public class finishscript : MonoBehaviour
         if (player.brsrafova == potrebanbrsrafova)
         {
             finishcollider.enabled = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            print("tusam");
+            player.ReverseRoles();
+            enemy.ReverseRoles();
         }
     }
 }

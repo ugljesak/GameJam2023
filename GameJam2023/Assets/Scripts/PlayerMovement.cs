@@ -64,18 +64,29 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		print(isjuring);
+		if (isjuring)
+		{
+			ms = jurims;
+		}
 		if (dashujem)
 		{
-			if (dashcooldown <= 1.9)
+			if (dashcooldown <= dashCD-0.05)
 			{
 				dashujem = false;
-				ms /= 5;
+				ms /= 10;
 				invincible = false;	
 			}
 			orientation = dashorientation;
 		}
-		putanja.Add(orientation);
+		else if (isjuring)
+        {
+            ms = jurims;
+        }
+		else
+		{
+			ms = bezims;
+		}
+        putanja.Add(orientation);
 		
         if (canmove)
 		{
@@ -157,11 +168,6 @@ public class PlayerMovement : MonoBehaviour
 		sawcooldown-= Time.fixedDeltaTime;
 		//print(dashcooldown);
 		time += Time.fixedDeltaTime;
-		if (time >= 5)
-		{
-			print("ROLES REVERSED");
-			ReverseRoles();
-		}
 
 	}
 
@@ -177,18 +183,18 @@ public class PlayerMovement : MonoBehaviour
         return false;
     }
 
-	private void ReverseRoles()
+	public void ReverseRoles()
 	{
 
 		putanja.Clear();
 		inputtime.Clear();
-		time = 0;
 		if (isjuring)
 		{
 			ms = bezims;
 			isjuring = false;
 			invincible = false;
 			animator.SetBool("juri", false);
+			dashcooldown = dashCD;
 		}
 		else
 		{
@@ -196,6 +202,7 @@ public class PlayerMovement : MonoBehaviour
 			isjuring = true;
 			invincible = true;
             animator.SetBool("juri", true);
+			sawcooldown = sawCD;
         }
 	}
 
@@ -205,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
 		dashujem = true;
 		dashorientation = orientation;
 		dashcooldown = dashCD;
-		ms *= 5;
+		ms *= 10;
 		invincible = true;
 	}
 
@@ -259,12 +266,12 @@ public class PlayerMovement : MonoBehaviour
 		canmove = false;
         animator.SetBool("ismoving", false);
 		animator.SetBool("sawblade", true);
+        sawcooldown = sawCD;
     }
 
 	private void SawEnd()
 	{
         ss.SpawnBlade();
-        sawcooldown = sawCD;
         canmove = true;
 		animator.SetBool("sawblade", false);
     }
