@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
 		invincible = true;
 		health = 10;
 		isjuring = false;
+		canmove = true;
 	}
 
 	void Update()
@@ -335,5 +336,6 @@ public class PlayerMovement : MonoBehaviour
 	private void DeathEnd()
 	{
 		Destroy(gameObject);
+		canmove = true;
 	}
 }
