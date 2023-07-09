@@ -7,7 +7,7 @@ public class Map1ButtonScript : MonoBehaviour
 {
     public void ButtonMap1()
     {
-        SceneManager.LoadScene("Dodos");
+        SceneManager.LoadScene("Map1");
     }
     public void ButtonMap2()
     {
