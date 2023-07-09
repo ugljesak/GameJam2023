@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class nutscript : MonoBehaviour
 {
-	public static int nutCount;
+	public static int nutCount = 0;
 	public static int maxNut;
 
     void Start()
