@@ -8,7 +8,7 @@ public class rolesmovement : MonoBehaviour
     public Vector3 startPosition;
     public Vector3 endPosition;
     Vector3 mposition = new Vector3(0.0f, 2.0f, -1.0f);
-    public float speed = 12.0f;
+    public float speed = 15.0f;
     bool pola = false;
     bool zavrsio = false;
     float step = 0;
@@ -17,7 +17,7 @@ public class rolesmovement : MonoBehaviour
     void Start()
     {
         transform.position = startPosition;
-        speed = 12.0f;
+        speed = 15.0f;
 }
 
     private void Update()
@@ -25,7 +25,7 @@ public class rolesmovement : MonoBehaviour
         if (revv == false)
         {
             transform.position = startPosition;
-            speed = 12.0f;
+            speed = 15.0f;
             return;
         }
 
