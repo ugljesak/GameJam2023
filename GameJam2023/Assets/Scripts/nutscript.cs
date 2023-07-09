@@ -9,7 +9,8 @@ public class nutscript : MonoBehaviour
 
     void Start()
     {
-        
+		maxNut = 1;
+		nutCount = 0;
     }
 	
 	private void OnTriggerEnter2D(Collider2D collision)
