@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class nutscript : MonoBehaviour
 {
-	public static int nutCount; 
+	public static int nutCount;
+	public static int maxNut;
 
     void Start()
     {
@@ -18,7 +19,8 @@ public class nutscript : MonoBehaviour
 		{
 			gameObject.GetComponent<AudioSource>().Play();
 			nutCount++;
-			transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
+			if (maxNut > nutCount) transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
+			else transform.position = new Vector3(100.0f, 100.0f, 0.0f);
 		}
 	}
 }
