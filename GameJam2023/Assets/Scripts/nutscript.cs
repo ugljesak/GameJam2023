@@ -9,7 +9,7 @@ public class nutscript : MonoBehaviour
 
     void Start()
     {
-		maxNut = 1;
+		maxNut = 10;
 		nutCount = 0;
     }
 	
@@ -31,6 +31,15 @@ public class nutscript : MonoBehaviour
 				
 			}
 			else transform.position = new Vector3(100.0f, 100.0f, 0.0f);
+		}
+	}
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (collision.gameObject.tag == "Wall")
+		{
+			transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
+			return;
 		}
 	}
 }
