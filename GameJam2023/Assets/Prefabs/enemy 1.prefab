@@ -132,8 +132,9 @@ MonoBehaviour:
   inputtime: []
   rb: {fileID: 4732719607804317700}
   ms: 0
-  jurims: 2.5
+  jurims: 3.5
   bezims: 5
+  isjuring: 0
   animator: {fileID: 2063012925029102946}
   lookingDirection: {x: 0, y: 0}
   bladeSpawner: {fileID: 688185773480695843, guid: 643760675d313804796b04e367c6f288, type: 3}
@@ -157,6 +158,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   collisionOffset: 0.05
+  CD: 0
 --- !u!95 &2063012925029102946
 Animator:
   serializedVersion: 5
