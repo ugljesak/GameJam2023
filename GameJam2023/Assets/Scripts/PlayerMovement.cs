@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -44,6 +46,10 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject reverseSound;
 	public GameObject deathSound;
 	public GameObject dashSound;
+	bool isattacking = false;
+	string curanim;
+	bool isdying = false;
+	
 	
 
     void Start()
@@ -61,7 +67,23 @@ public class PlayerMovement : MonoBehaviour
 		health = 10;
 		isjuring = false;
 		canmove = true;
+		curanim = "playeridle1";
 	}
+
+	void ChangeAnimation(string newanim)
+	{
+		if (!CanChangeAnimation(newanim)) return;
+		animator.Play(newanim);
+		curanim = newanim;
+	}
+
+	bool CanChangeAnimation(string newanim)
+	{
+        if (newanim == curanim) return false;
+		if (isattacking) return false;
+		if(isdying) return false;
+		return true;
+    }
 
 	void Update()
 	{
@@ -79,9 +101,10 @@ public class PlayerMovement : MonoBehaviour
 	{
         if (health <= 0)
         {
-            animator.SetBool("umro", true);
+			ChangeAnimation("playerdeath");
             deathSound.GetComponent<AudioSource>().Play();
             print("UMRO player");
+			return;
         }
         if (isjuring)
 		{
@@ -109,37 +132,29 @@ public class PlayerMovement : MonoBehaviour
 		
         if (canmove)
 		{
-            if (orientation.x > 0)
+			if (orientation.x > 0)
+			{
+				if (isjuring) ChangeAnimation("playerrunright");
+				else ChangeAnimation("playerrunright1");
+			}
+            else if(orientation.x<0)
             {
-                animator.SetBool("isright", true);
-                animator.SetBool("isleft", false);
+                if (isjuring) ChangeAnimation("playerrunleft");    
+                else ChangeAnimation("playerrunleft1");
             }
-            else if (orientation.x == 0)
-            {
-                animator.SetBool("isright", false);
-                animator.SetBool("isleft", false);
-            }
-            else
-            {
-                animator.SetBool("isleft", true);
-                animator.SetBool("isright", false);
-            }
-
-            if (orientation.y > 0)
-            {
-                animator.SetBool("isup", true);
-                animator.SetBool("isdown", false);
-            }
-            else if (orientation.y == 0)
-            {
-                animator.SetBool("isup", false);
-                animator.SetBool("isdown", false);
-            }
-            else
-            {
-                animator.SetBool("isdown", true);
-                animator.SetBool("isup", false);
-            }
+			else
+			{
+				if (orientation.y > 0)
+				{
+                    if (isjuring) ChangeAnimation("playerrunup");
+                    else ChangeAnimation("playerrunup1");
+                }
+				else if(orientation.y<0)
+				{
+                    if (isjuring) ChangeAnimation("playerrundown");
+                    else ChangeAnimation("playerrundown1");
+                }
+			}
             if (orientation != Vector2.zero)
             {
                 bool success = TryMove(orientation);
@@ -152,12 +167,13 @@ public class PlayerMovement : MonoBehaviour
                 {
                     success = TryMove(new Vector2(0, orientation.y));
                 }
-                animator.SetBool("ismoving", true);
             }
             else
             {
-                animator.SetBool("ismoving", false);
+				if (isjuring) ChangeAnimation("playeridle");
+				else ChangeAnimation("playeridle1");
             }
+			
 
 
 			bladeSpawner.GetComponent<spawnerscript>().playerPosition = transform.position;
@@ -181,6 +197,11 @@ public class PlayerMovement : MonoBehaviour
 					}
 				}
 			}
+		}
+		else if(!isattacking)
+		{
+			if (isjuring) ChangeAnimation("playeridle"); 
+			else ChangeAnimation("playeridle1");
 		}
 		//print (orientation);
 		dashcooldown-= Time.fixedDeltaTime;
@@ -230,20 +251,20 @@ public class PlayerMovement : MonoBehaviour
 			ms = bezims;
 			isjuring = false;
 			invincible = false;
-			animator.SetBool("juri", false);
 			dashcooldown = dashCD;
 			transform.position = pozbezi;
 			health = 1;
-		}
+            animator.Play("playeridle1");
+        }
 		else
 		{
 			ms = jurims;
 			isjuring = true;
 			invincible = true;
-            animator.SetBool("juri", true);
 			sawcooldown = sawCD;
 			transform.position = pozjuri;
 			score++;
+            animator.Play("playeridle");
         }
 	}
 
@@ -265,41 +286,41 @@ public class PlayerMovement : MonoBehaviour
 		{
 			if (lookingDirection.y > 0)
 			{
-				animator.SetTrigger("sawu");
+				ChangeAnimation("playerblehup");
 			}
 			else
 			{
-				animator.SetTrigger("sawd");
-			}
+                ChangeAnimation("playerblehdown");
+            }
 		}
 		else if (lookingDirection.x > 0)
 		{
 			if (lookingDirection.y > 0)
 			{
-				animator.SetTrigger("sawur");
-			}
+                ChangeAnimation("playerblehur");
+            }
 			else if (lookingDirection.y < 0)
 			{
-                animator.SetTrigger("sawdr");
+                ChangeAnimation("playerblehdr");
             }
 			else
 			{
-                animator.SetTrigger("sawr");
+                ChangeAnimation("playerblehright");
             }
 		}
 		else
 		{
             if (lookingDirection.y > 0)
             {
-                animator.SetTrigger("sawul");
+                ChangeAnimation("playerblehul");
             }
             else if (lookingDirection.y < 0)
             {
-                animator.SetTrigger("sawdl");
+                ChangeAnimation("playerblehdl");
             }
             else
             {
-                animator.SetTrigger("sawl");
+                ChangeAnimation("playerblehleft");
             }
         }
     }
@@ -307,9 +328,8 @@ public class PlayerMovement : MonoBehaviour
 	private void SawStart()
 	{
 		canmove = false;
-        animator.SetBool("ismoving", false);
-		animator.SetBool("sawblade", true);
         sawcooldown = sawCD;
+		isattacking = true;
 		gameObject.GetComponent<AudioSource>().Play();
     }
 
@@ -317,7 +337,8 @@ public class PlayerMovement : MonoBehaviour
 	{
         ss.SpawnBlade();
         canmove = true;
-		animator.SetBool("sawblade", false);
+		isattacking = false;
+        ChangeAnimation("playeridle");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -325,22 +346,18 @@ public class PlayerMovement : MonoBehaviour
 		if (collision.gameObject.tag == "saw" && !invincible)
 		{
 			health--;
-			if (health <= 0)
-			{
-				animator.SetBool("umro",true);
-				deathSound.GetComponent<AudioSource>().Play();
-				print("UMRO player");
-			}
 		}
 	}
 
 	private void DeathStart()
 	{
 		canmove = false;
+		isdying = true;
 	}
 
 	private void DeathEnd()
 	{
+		isdying = false;
 		Destroy(gameObject);
 		canmove = true;
 	}
