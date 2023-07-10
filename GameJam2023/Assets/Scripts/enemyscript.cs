@@ -22,12 +22,13 @@ public class enemyscript : MonoBehaviour
     int i = 0;
     int j = 0;
     bool bilazamena = false;
-    float timezainput;
     bool invincible = false;
     int maxhealth = 1;
     public static int health = 1;
     Vector3 pozbezi = new Vector3((float)-8.87, (float)-4.35,1);
     Vector3 pozjuri = new Vector3((float)9.84, (float)4.35,1);
+    bool isattacking = false;
+    string curanim;
 
     public Vector2 lookingDirection;
     public GameObject bladeSpawner;
@@ -46,6 +47,8 @@ public class enemyscript : MonoBehaviour
     Vector2 orientation;
     bool canmove = true;
     public float CD;
+    bool ishit = false;
+    bool isdying = false;
 
     void Start()
     {
@@ -53,18 +56,39 @@ public class enemyscript : MonoBehaviour
         ms = jurims;
         isjuring = true;
         time = 0;
-        timezainput = 0;
         transform.position = pozjuri;
         invincible = false;
         health = 1;
         maxhealth = 1;
         CD = 2;
+        curanim = "enemyidle1";
+    }
+
+    void ChangeAnimation(string newanim)
+    {
+        if (!CanChangeAnimation(newanim)) return;
+        animator.Play(newanim);
+        curanim = newanim;
+    }
+
+    bool CanChangeAnimation(string newanim)
+    {
+        if (isattacking) return false;
+        if(isdying) return false;
+        if (curanim == "enemyhit" && newanim=="enemyhit") return true;
+        if (ishit) return false;
+        if (curanim == newanim) return false;
+        return true;
     }
 
     void FixedUpdate()
     {
         if (bilazamena)
         {
+            if (health <= 0)
+            {
+                ChangeAnimation("enemydeath");
+            }
             if (isjuring)
             {
                 ms = jurims;
@@ -96,40 +120,33 @@ public class enemyscript : MonoBehaviour
             {
                 orientation =new Vector2(0, 0);
             }
+            print(orientation);
             if (orientation != Vector2.zero) lookingDirection = orientation;
             bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
             if (canmove)
             {
                 if (orientation.x > 0)
                 {
-                    animator.SetBool("isright", true);
-                    animator.SetBool("isleft", false);
+                    if (isjuring) ChangeAnimation("enemyrunright");
+                    else ChangeAnimation("enemyrunright1");
                 }
-                else if (orientation.x == 0)
+                else if (orientation.x < 0)
                 {
-                    animator.SetBool("isright", false);
-                    animator.SetBool("isleft", false);
-                }
-                else
-                {
-                    animator.SetBool("isleft", true);
-                    animator.SetBool("isright", false);
-                }
-
-                if (orientation.y > 0)
-                {
-                    animator.SetBool("isup", true);
-                    animator.SetBool("isdown", false);
-                }
-                else if (orientation.y == 0)
-                {
-                    animator.SetBool("isup", false);
-                    animator.SetBool("isdown", false);
+                    if (isjuring) ChangeAnimation("enemyrunleft");
+                    else ChangeAnimation("enemyrunleft1");
                 }
                 else
                 {
-                    animator.SetBool("isdown", true);
-                    animator.SetBool("isup", false);
+                    if (orientation.y > 0)
+                    {
+                        if (isjuring) ChangeAnimation("enemyrunup");
+                        else ChangeAnimation("enemyrunup1");
+                    }
+                    else if (orientation.y < 0)
+                    {
+                        if (isjuring) ChangeAnimation("enemyrundown");
+                        else ChangeAnimation("enemyrundown1");
+                    }
                 }
                 if (orientation != Vector2.zero)
                 {
@@ -143,11 +160,11 @@ public class enemyscript : MonoBehaviour
                     {
                         success = TryMove(new Vector2(0, orientation.y));
                     }
-                    animator.SetBool("ismoving", true);
                 }
                 else
                 {
-                    animator.SetBool("ismoving", false);
+                    if (isjuring) ChangeAnimation("enemyidle");
+                    else ChangeAnimation("enemyidle1");
                 }
 
 
@@ -169,6 +186,11 @@ public class enemyscript : MonoBehaviour
                         }
                     }
                 }
+            }
+            else
+            {
+                if (isjuring) ChangeAnimation("enemyidle");
+                else ChangeAnimation("enemyidle1");
             }
         }
         dashcooldown -= Time.fixedDeltaTime;
@@ -211,17 +233,17 @@ public class enemyscript : MonoBehaviour
             ms = bezims;
             isjuring = false;
             invincible = false;
-            animator.SetBool("juri", false);
             transform.position = pozbezi;
             maxhealth++;
+            animator.Play("enemyidle1");
         }
         else
         {
             ms = jurims;
             isjuring = true;
             invincible = true;
-            animator.SetBool("juri", true);
             transform.position = pozjuri;
+            animator.Play("enemyidle");
         }
     }
 
@@ -240,41 +262,41 @@ public class enemyscript : MonoBehaviour
         {
             if (lookingDirection.y > 0)
             {
-                animator.SetTrigger("sawu");
+                ChangeAnimation("enemyblehup");
             }
             else
             {
-                animator.SetTrigger("sawd");
+                ChangeAnimation("enemyblehdown");
             }
         }
         else if (lookingDirection.x > 0)
         {
             if (lookingDirection.y > 0)
             {
-                animator.SetTrigger("sawur");
+                ChangeAnimation("enemyblehur");
             }
             else if (lookingDirection.y < 0)
             {
-                animator.SetTrigger("sawdr");
+                ChangeAnimation("enemyblehdr");
             }
             else
             {
-                animator.SetTrigger("sawr");
+                ChangeAnimation("enemyblehright");
             }
         }
         else
         {
             if (lookingDirection.y > 0)
             {
-                animator.SetTrigger("sawul");
+                ChangeAnimation("enemyblehul");
             }
             else if (lookingDirection.y < 0)
             {
-                animator.SetTrigger("sawdl");
+                ChangeAnimation("enemyblehdl");
             }
             else
             {
-                animator.SetTrigger("sawl");
+                ChangeAnimation("enemyblehleft");
             }
         }
     }
@@ -282,16 +304,16 @@ public class enemyscript : MonoBehaviour
     private void SawStart()
     {
         canmove = false;
-        animator.SetBool("ismoving", false);
-        animator.SetBool("sawblade", true);
         sawcooldown = sawCD;
+        isattacking = true;
     }
 
     private void SawEnd()
     {
         ss.SpawnBlade();
+        isattacking = false;
+        ChangeAnimation("enemyidle");
         canmove = true;
-        animator.SetBool("sawblade", false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -301,14 +323,13 @@ public class enemyscript : MonoBehaviour
             health--;
             if (health > 0)
             {
-                animator.SetTrigger("hit");
+                ChangeAnimation("enemyhit");
             }
             if (health == 0)
             {
                 print("UMRO enemy");
-                animator.SetBool("umro",true);
                 nutscript.nutCount = 0;
-                nutscript.maxNut++;
+                nutscript.maxNut = maxhealth + 1;
             }
         }
     }
@@ -316,19 +337,26 @@ public class enemyscript : MonoBehaviour
     private void DeathStart()
     {
         canmove = false;
+        isdying = true;
     }
 
     private void DeathEnd()
     {
+        isdying = false;
         ReverseRoles();
         player.ReverseRoles();
-        animator.SetBool("umro", false);
+        ChangeAnimation("enemyidle1");
         canmove = true;
         health = maxhealth;
     }
 
+    private void HitStart()
+    {
+        ishit = true;
+    }
     private void HitEnd()
     {
-        animator.SetBool("hit", false);
+        ishit = false;
+        ChangeAnimation("enemyidle1");
     }
 }
