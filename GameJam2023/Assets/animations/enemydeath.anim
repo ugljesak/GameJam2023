@@ -26,6 +26,8 @@ AnimationClip:
       value: {fileID: 1952499828, guid: 93b7fd2bde6ddf040ad2accbed436f1d, type: 3}
     - time: 0.2
       value: {fileID: 818484539, guid: 93b7fd2bde6ddf040ad2accbed436f1d, type: 3}
+    - time: 0.7
+      value: {fileID: 818484539, guid: 93b7fd2bde6ddf040ad2accbed436f1d, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -51,12 +53,13 @@ AnimationClip:
     - {fileID: 184801779, guid: 93b7fd2bde6ddf040ad2accbed436f1d, type: 3}
     - {fileID: 1952499828, guid: 93b7fd2bde6ddf040ad2accbed436f1d, type: 3}
     - {fileID: 818484539, guid: 93b7fd2bde6ddf040ad2accbed436f1d, type: 3}
+    - {fileID: 818484539, guid: 93b7fd2bde6ddf040ad2accbed436f1d, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.3
+    m_StopTime: 0.8
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -83,7 +86,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.1
+  - time: 0.7
     functionName: DeathEnd
     data: 
     objectReferenceParameter: {fileID: 0}
