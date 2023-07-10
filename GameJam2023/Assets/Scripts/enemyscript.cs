@@ -84,11 +84,6 @@ public class enemyscript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(isjuring != prisjuring)
-		{
-            if (isjuring == true) once = true;
-            prisjuring = isjuring;
-		}
         if (bilazamena)
         {
             if (health <= 0)
