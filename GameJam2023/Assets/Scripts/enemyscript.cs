@@ -24,7 +24,7 @@ public class enemyscript : MonoBehaviour
     bool bilazamena = false;
     float timezainput;
     bool invincible = false;
-    int maxhealth = 1;
+    public static int maxhealth = 1;
     public static int health = 1;
     Vector3 pozbezi = new Vector3((float)-8.87, (float)-4.35,1);
     Vector3 pozjuri = new Vector3((float)9.84, (float)4.35,1);
@@ -46,6 +46,8 @@ public class enemyscript : MonoBehaviour
     Vector2 orientation;
     bool canmove = true;
     public float CD;
+    bool once = false;
+    bool prisjuring = true;
 
     void Start()
     {
@@ -63,6 +65,11 @@ public class enemyscript : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(isjuring != prisjuring)
+		{
+            if (isjuring == true) once = true;
+            prisjuring = isjuring;
+		}
         if (bilazamena)
         {
             if (isjuring)
@@ -213,7 +220,11 @@ public class enemyscript : MonoBehaviour
             invincible = false;
             animator.SetBool("juri", false);
             transform.position = pozbezi;
-            maxhealth++;
+			if (once == true)
+			{
+                maxhealth++;
+                once = false;
+            }
         }
         else
         {
@@ -308,7 +319,7 @@ public class enemyscript : MonoBehaviour
                 print("UMRO enemy");
                 animator.SetBool("umro",true);
                 nutscript.nutCount = 0;
-                nutscript.maxNut++;
+                nutscript.maxNut = maxhealth + 1;
             }
         }
     }
