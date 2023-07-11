@@ -121,7 +121,6 @@ public class enemyscript : MonoBehaviour
             {
                 orientation =new Vector2(0, 0);
             }
-            print(orientation);
             if (orientation != Vector2.zero) lookingDirection = orientation;
             bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
             if (canmove)
@@ -332,6 +331,7 @@ public class enemyscript : MonoBehaviour
                 nutscript.nutCount = 0;
                 nutscript.maxNut = maxhealth + 1;
             }
+            Destroy(collision.gameObject);
         }
     }
 

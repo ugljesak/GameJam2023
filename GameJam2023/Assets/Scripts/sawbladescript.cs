@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class sawbladescript : MonoBehaviour
 {
-    Vector2 currentVelocity;
     Rigidbody2D rb;
     public float speed;
     float time;
     public float lifeTime;
     public static bool revv = false;
+    Vector2 pravaczida;
+    Vector2 pravacnormale;
+    Vector2 pravacparalele;
 
     void Start()
     {
@@ -37,36 +40,23 @@ public class sawbladescript : MonoBehaviour
 		}
 	}
 
-	private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
 	{
         if(collision.gameObject.tag == "Wall")
 		{
             gameObject.GetComponent<AudioSource>().Play();
-            currentVelocity = rb.velocity;
-		}
-	}
-	private void OnCollisionExit2D(Collision2D collision)
-	{
-        if (collision.gameObject.tag == "Wall")
+            pravaczida = collision.gameObject.GetComponent<wallscript>().pravac;
+            pravacnormale.x = -pravaczida.y;
+            pravacnormale.y = pravaczida.x;
+            rb.velocity = Vector3.Project(rb.velocity, pravaczida) - Vector3.Project(rb.velocity, pravacnormale);
+        }
+        if (collision.gameObject.tag == "saw")
         {
-            int signX = 0, signY = 0;
-            if(Mathf.Abs(currentVelocity.x - rb.velocity.x) < Mathf.Abs(currentVelocity.x + rb.velocity.x))
-			{
-                signX = 1;
-			}
-			else
-			{
-                signX = -1;
-			}
-            if (Mathf.Abs(currentVelocity.y - rb.velocity.y) < Mathf.Abs(currentVelocity.y + rb.velocity.y))
-            {
-                signY = 1;
-            }
-            else
-            {
-                signY = -1;
-            }
-            rb.velocity = new Vector2(currentVelocity.x * signX, currentVelocity.y * signY);
+            pravacnormale = gameObject.transform.position - collision.transform.position;
+            pravacparalele.x = -pravacnormale.y;
+            pravacparalele.y=pravacnormale.x;
+            rb.velocity = Vector3.Project(rb.velocity, pravacparalele) - Vector3.Project(rb.velocity, pravacnormale);
         }
     }
 }

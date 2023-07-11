@@ -345,7 +345,9 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "saw" && !invincible)
 		{
+			print("aaaaaaaaaaa");
 			health--;
+			Destroy(collision.gameObject);
 		}
 	}
 

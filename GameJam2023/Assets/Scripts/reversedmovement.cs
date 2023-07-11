@@ -33,7 +33,6 @@ public class reversedmovement : MonoBehaviour
         {
             if (transform.position.y < mposition.y)
             {
-                print(transform.position);
                 step = speed * Time.deltaTime;
                 speed -= 0.06f;
                 transform.position = Vector3.MoveTowards(transform.position, mposition, step);

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6994694954282046644}
   - component: {fileID: 7448954663108872618}
   m_Layer: 0
-  m_Name: broder
+  m_Name: block
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
