@@ -63,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
 		sawcooldown = 0;
 		putanja.Add(Vector2.zero);
 		score = 0;
-		invincible = true;
-		health = 10;
+		invincible = false;
+		health = 1;
 		isjuring = false;
 		canmove = true;
 		curanim = "playeridle1";
@@ -266,6 +266,7 @@ public class PlayerMovement : MonoBehaviour
 			score++;
             animator.Play("playeridle");
         }
+		canmove = true;
 	}
 
 	private void Dash()
@@ -345,6 +346,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (collision.gameObject.tag == "saw" && !invincible)
 		{
+			print(invincible);
 			print("aaaaaaaaaaa");
 			health--;
 			Destroy(collision.gameObject);
@@ -360,7 +362,6 @@ public class PlayerMovement : MonoBehaviour
 	private void DeathEnd()
 	{
 		isdying = false;
-		Destroy(gameObject);
 		canmove = true;
 	}
 }

@@ -245,6 +245,7 @@ public class enemyscript : MonoBehaviour
             transform.position = pozjuri;
             animator.Play("enemyidle");
         }
+        canmove = true;
     }
 
     private void Dash()
@@ -325,7 +326,7 @@ public class enemyscript : MonoBehaviour
             {
                 ChangeAnimation("enemyhit");
             }
-            if (health == 0)
+            if (health <= 0)
             {
                 print("UMRO enemy");
                 nutscript.nutCount = 0;
