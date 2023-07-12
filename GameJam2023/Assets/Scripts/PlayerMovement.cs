@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 	string curanim;
 	bool isdying = false;
 	public nutscript nut;
-	
+	public finishscript finish;
 
     void Start()
 	{
@@ -260,6 +260,8 @@ public class PlayerMovement : MonoBehaviour
 			nut.RandomPosition();
 			nutscript.maxtime += 5;
 			nutscript.timer = nutscript.maxtime;
+			finish.GetComponent<Animator>().Play("empty");
+			finish.dosoportal = false;
         }
 		else
         {

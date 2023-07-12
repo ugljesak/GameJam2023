@@ -1894,6 +1894,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 285117145}
     - target: {fileID: 2020859268929683010, guid: b34cbd3ef7d2a804eb95c51353f67977, type: 3}
+      propertyPath: finish
+      value: 
+      objectReference: {fileID: 1468140157}
+    - target: {fileID: 2020859268929683010, guid: b34cbd3ef7d2a804eb95c51353f67977, type: 3}
       propertyPath: dashSound
       value: 
       objectReference: {fileID: 1317138481}
@@ -2972,6 +2976,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1468140157 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1013446465996371484, guid: a1a5e71da890b0f4681d454a13d78b6b, type: 3}
+  m_PrefabInstance: {fileID: 1949319950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21d8cfbb2ce096749bbd841eb7b9f4fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1504993814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3789,7 +3804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7826087900096445187, guid: c61e1ab5807013a4b9005a99feed643a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.05
+      value: 7.37
       objectReference: {fileID: 0}
     - target: {fileID: 7826087900096445187, guid: c61e1ab5807013a4b9005a99feed643a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4416,7 +4431,11 @@ PrefabInstance:
     - target: {fileID: 3461646088029417470, guid: a1a5e71da890b0f4681d454a13d78b6b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -272534206, guid: 4dbe16d00cbacba418ab8440f6d712e7, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3461646088029417470, guid: a1a5e71da890b0f4681d454a13d78b6b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9125902400255569075, guid: a1a5e71da890b0f4681d454a13d78b6b, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
       value: 0.96007633
@@ -4765,7 +4784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4065266023652365058, guid: 5a632ce2f21d4324d9f8d4eca2e102bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.91
+      value: -7.32
       objectReference: {fileID: 0}
     - target: {fileID: 4065266023652365058, guid: 5a632ce2f21d4324d9f8d4eca2e102bc, type: 3}
       propertyPath: m_LocalPosition.z

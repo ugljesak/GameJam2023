@@ -7,16 +7,27 @@ public class finishscript : MonoBehaviour
     public PlayerMovement player;
     public enemyscript enemy;
     public Collider2D finishcollider;
-    public int potrebanbrsrafova;
-    public SpriteRenderer sr;
-    public Sprite vrata;
-    public Sprite blocks_12;
+    public Animator animator;
+    string curanim;
+    public bool dosoportal = false;
 
     void Start()
     {
-        potrebanbrsrafova = 0;
         finishcollider.enabled = false;
-        sr=GetComponent<SpriteRenderer>();
+        curanim = "empty";
+    }
+
+    void ChangeAnimation(string newanim)
+    {
+        if (!CanChangeAnimation(newanim)) return;
+        animator.Play(newanim);
+        curanim = newanim;
+    }
+
+    bool CanChangeAnimation(string newanim)
+    {
+        if(newanim == curanim) return false;
+        return true;
     }
 
     private void FixedUpdate()
@@ -24,12 +35,15 @@ public class finishscript : MonoBehaviour
         if (nutscript.nutCount==nutscript.maxNut)
         {
             finishcollider.enabled = true;
-            sr.sprite = vrata;
+            if (!dosoportal) 
+            { 
+                ChangeAnimation("portalspawn");
+                dosoportal = true; 
+            }
         }
         else
         {
             finishcollider.enabled = false;
-            sr.sprite = blocks_12;
         }
     }
 
@@ -42,7 +56,15 @@ public class finishscript : MonoBehaviour
         }
         if(collision.gameObject.tag=="enemy" && !enemy.isjuring)
         {
-            //PlayerMovement.health = 0;
+            PlayerMovement.health = 0;
         }
+    }
+
+  
+
+    public void EndSpawn()
+    {
+        print("ASDAAA");
+        ChangeAnimation("portal");
     }
 }
