@@ -13,7 +13,7 @@ public class RedHeartsTMP : MonoBehaviour
     HeartRedScript neededScriptHeart;
     CogImage neededScriptCog;
     public int MaxHp;
-    public int CurrentHp, Increase = 0, StartingHp, CurrentPickUps;
+    public int CurrentHp, Increase = 0, StartingHp, CurrentPickUps, MaxPickUps;
     public bool IsHitRed, IsChangedToRun, IsChangedToShoot, IsHitBlue, PickUp;
     [SerializeField] private TextMeshProUGUI MyTextElement;
     private void Start()
@@ -28,20 +28,16 @@ public class RedHeartsTMP : MonoBehaviour
     {
 
 
-
-        CurrentPickUps = nutscript.nutCount;
-        MyTextElement.text = CurrentPickUps + "/" + (nutscript.maxNut).ToString();
             
         if(!PlayerMovement.isjuring)
         {
-            Increase++;
-            CurrentPickUps = 0;
-            MyTextElement.text = "0/" + (nutscript.maxNut).ToString();
             MyTextElement.color = Color.black;
-            CurrentHp = 1; MaxHp = 1;
-            IsChangedToRun = false;
             neededScriptHeart.RedHeartDisappear();
             neededScriptCog.CogAppear();
+            CurrentPickUps = nutscript.nutCount;
+            MaxPickUps = nutscript.maxNut;
+            MyTextElement.text = CurrentPickUps + "/" + MaxPickUps.ToString();
+
         }
         if(PlayerMovement.isjuring)
         {
@@ -51,14 +47,15 @@ public class RedHeartsTMP : MonoBehaviour
             MyTextElement.color = new Color(1f, 0.38f, 0.38f, 1f);
             IsChangedToShoot = false;
             neededScriptHeart.RedHeartAppear();
-            neededScriptCog.CogDisappear(); 
+            neededScriptCog.CogDisappear();
+            CurrentHp = enemyscript.health;
+            MaxHp = enemyscript.maxhealth - 1;
+            MyTextElement.text = CurrentHp.ToString() + "/" + MaxHp.ToString();
         }
         if(PlayerMovement.health == 0)
         {
             DeathScreenVariable.Setup(deathscreenscore.GetComponent<ScoreTMP>().CurrentScore);
         }
-        CurrentHp = enemyscript.health;
-        MyTextElement.text = CurrentHp.ToString() + "/" + MaxHp.ToString();
  
     }
 }

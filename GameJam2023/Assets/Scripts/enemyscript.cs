@@ -94,7 +94,7 @@ public class enemyscript : MonoBehaviour
             {
                 ms = jurims;
             }
-            if (dashujem)
+            if (dashujem && !isjuring)
             {
                 if (dashcooldown <= dashCD - 0.05)
                 {
@@ -187,7 +187,7 @@ public class enemyscript : MonoBehaviour
                     }
                 }
             }
-            else
+            else if(!isattacking)
             {
                 if (isjuring) ChangeAnimation("enemyidle");
                 else ChangeAnimation("enemyidle1");
@@ -246,6 +246,7 @@ public class enemyscript : MonoBehaviour
             animator.Play("enemyidle");
         }
         canmove = true;
+        isattacking = false;
     }
 
     private void Dash()
@@ -329,8 +330,6 @@ public class enemyscript : MonoBehaviour
             if (health <= 0)
             {
                 print("UMRO enemy");
-                nutscript.nutCount = 0;
-                nutscript.maxNut = maxhealth + 1;
             }
             Destroy(collision.gameObject);
         }

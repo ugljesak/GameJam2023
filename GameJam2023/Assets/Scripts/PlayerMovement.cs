@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 	public float collisionOffset = 0.05f;
 	bool dashujem = false;
 	Vector2 dashorientation;
-	bool invincible = true;
+	bool invincible = false;
 	Vector2 pozbezi=new Vector2((float)-8.87, (float)-4.35);
     Vector2 pozjuri = new Vector2((float)9.84, (float)4.35);
 	float CD;
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 	bool isattacking = false;
 	string curanim;
 	bool isdying = false;
-	
+	public nutscript nut;
 	
 
     void Start()
@@ -99,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		print(nutscript.maxNut);
         if (health <= 0)
         {
 			ChangeAnimation("playerdeath");
@@ -110,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			ms = jurims;
 		}
-		if (dashujem)
+		if (dashujem && !isjuring)
 		{
 			if (dashcooldown <= dashCD-0.05)
 			{
@@ -237,6 +239,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void ReverseRoles()
 	{
+		print("ROLES REVERSED");
 		reverseSound.GetComponent<AudioSource>().Play();
 		putanja.Clear();
 		inputtime.Clear();
@@ -245,28 +248,32 @@ public class PlayerMovement : MonoBehaviour
 		rolesmovement.revv = true;
 		reversedmovement.revv = true;
 		sawbladescript.revv = true;
-
 		if (isjuring)
-		{
-			ms = bezims;
+        {
+            invincible = false;
+            ms = bezims;
 			isjuring = false;
-			invincible = false;
 			dashcooldown = dashCD;
 			transform.position = pozbezi;
 			health = 1;
             animator.Play("playeridle1");
+			nutscript.nutCount = 0;
+			nutscript.maxNut++;
+			nut.RandomPosition();
         }
 		else
-		{
-			ms = jurims;
+        {
+            invincible = true;
+            ms = jurims;
 			isjuring = true;
-			invincible = true;
 			sawcooldown = sawCD;
 			transform.position = pozjuri;
 			score++;
             animator.Play("playeridle");
+			nut.transform.position = new Vector3(100.0f, 100.0f, 0.0f);
         }
 		canmove = true;
+		isattacking = false;
 	}
 
 	private void Dash()

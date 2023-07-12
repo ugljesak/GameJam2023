@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class doorscript : MonoBehaviour
 {
-    public PlayerMovement player;
     public Collider doorcollider;
-    public int potrebanbrsrafova;
+
     void Start()
     {
-        potrebanbrsrafova = 0;
         doorcollider.enabled = true;
 
     }
 
     private void FixedUpdate()
     {
-        if (player.brsrafova == potrebanbrsrafova)
+        if (nutscript.nutCount==nutscript.maxNut)
         {
             doorcollider.enabled = false;
         }
