@@ -12,6 +12,7 @@ public class nutscript : MonoBehaviour
     {
 		maxNut = 1;
 		nutCount = 0;
+        transform.position = new Vector3(Random.Range(0, 10), Random.Range(-5, 5), 1);
     }
 
     private void FixedUpdate()
@@ -22,13 +23,17 @@ public class nutscript : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "block")
+        {
+            RandomPosition();
+            return;
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if(collision.gameObject.tag == "Wall")
-		{
-			RandomPosition();
-			return;
-		}
 		print("UVACEN SI BATO BRE");
 		if(collision.gameObject.tag == "Player")
 		{
@@ -45,12 +50,19 @@ public class nutscript : MonoBehaviour
 
 	public void RandomPosition()
 	{
-        transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
+		if (nutCount % 2 == 0)
+		{
+            transform.position = new Vector3(Random.Range(0, 10), Random.Range(-5, 5), 1);
+        }
+		else
+		{
+            transform.position = new Vector3(Random.Range(-10, 0), Random.Range(-5, 5), 1);
+        }
     }
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "Wall")
+		if (collision.gameObject.tag == "block")
 		{
 			transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
 			return;
