@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 89375901}
   m_Layer: 0
   m_Name: blocks_0 (7)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1757,7 +1757,7 @@ GameObject:
   - component: {fileID: 744168807}
   m_Layer: 0
   m_Name: blocks_0 (10)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1933,11 +1933,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7426393757400437464, guid: 47dbe395327f49040bc0f68a239346aa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: -9.535
       objectReference: {fileID: 0}
     - target: {fileID: 7426393757400437464, guid: 47dbe395327f49040bc0f68a239346aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: -4.462
       objectReference: {fileID: 0}
     - target: {fileID: 7426393757400437464, guid: 47dbe395327f49040bc0f68a239346aa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1992,7 +1992,7 @@ GameObject:
   - component: {fileID: 855422682}
   m_Layer: 0
   m_Name: blocks_0 (5)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2218,7 +2218,7 @@ GameObject:
   - component: {fileID: 980512469}
   m_Layer: 0
   m_Name: blocks_0 (2)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2825,7 +2825,7 @@ GameObject:
   - component: {fileID: 1438679031}
   m_Layer: 0
   m_Name: blocks_0
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3246,7 +3246,7 @@ GameObject:
   - component: {fileID: 1606821806}
   m_Layer: 0
   m_Name: blocks_0 (11)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3770,11 +3770,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7826087900096445187, guid: c61e1ab5807013a4b9005a99feed643a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7826087900096445187, guid: c61e1ab5807013a4b9005a99feed643a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.22
+      value: 12.43
       objectReference: {fileID: 0}
     - target: {fileID: 7826087900096445187, guid: c61e1ab5807013a4b9005a99feed643a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3825,7 +3825,7 @@ GameObject:
   - component: {fileID: 1787446238}
   m_Layer: 0
   m_Name: blocks_0 (4)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3914,7 +3914,7 @@ GameObject:
   - component: {fileID: 1808166151}
   m_Layer: 0
   m_Name: blocks_0 (8)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4094,7 +4094,7 @@ GameObject:
   - component: {fileID: 1844202814}
   m_Layer: 0
   m_Name: blocks_0 (1)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4178,7 +4178,7 @@ GameObject:
   - component: {fileID: 1905740158}
   m_Layer: 0
   m_Name: blocks_0 (6)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4262,7 +4262,7 @@ GameObject:
   - component: {fileID: 1910902069}
   m_Layer: 0
   m_Name: blocks_0 (3)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4508,7 +4508,7 @@ GameObject:
   - component: {fileID: 1982247392}
   m_Layer: 0
   m_Name: blocks_0 (9)
-  m_TagString: Untagged
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4746,11 +4746,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4065266023652365058, guid: 5a632ce2f21d4324d9f8d4eca2e102bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 4065266023652365058, guid: 5a632ce2f21d4324d9f8d4eca2e102bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6
+      value: 9.91
       objectReference: {fileID: 0}
     - target: {fileID: 4065266023652365058, guid: 5a632ce2f21d4324d9f8d4eca2e102bc, type: 3}
       propertyPath: m_LocalPosition.z
