@@ -104,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
         if (health <= 0)
         {
 			ChangeAnimation("playerdeath");
-            deathSound.GetComponent<AudioSource>().Play();
             print("UMRO player");
 			return;
         }
@@ -356,7 +355,8 @@ public class PlayerMovement : MonoBehaviour
 			print(invincible);
 			print("aaaaaaaaaaa");
 			health--;
-			Destroy(collision.gameObject);
+            deathSound.GetComponent<AudioSource>().Play();
+            Destroy(collision.gameObject);
 		}
 	}
 
