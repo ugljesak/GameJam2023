@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cf784aa9bdd43896bfe3add2b1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 0, y: -9, z: -1}
-  endPosition: {x: 18, y: -2, z: -1}
+  startPosition: {x: 0, y: -9, z: -5}
+  endPosition: {x: 18, y: -2, z: -5}
   speed: 11
 --- !u!82 &-44656186421089105
 AudioSource:

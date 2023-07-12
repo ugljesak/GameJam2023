@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Globalization;
 
 public class ScoreTMP : MonoBehaviour
 {
@@ -10,10 +11,17 @@ public class ScoreTMP : MonoBehaviour
     [SerializeField] private TextMeshProUGUI MyTextElement;
     void Update()
     {
+        if (!PlayerMovement.isjuring)
+        {
+            NumberFormatInfo setPrecision = new NumberFormatInfo();
+            setPrecision.NumberDecimalDigits = 2;
+            MyTextElement.text = nutscript.timer.ToString("N",setPrecision);
+        }
+        else
+        {
+            MyTextElement.text = "";
+        }
 
-        CurrentScore = PlayerMovement.score;
-         MyTextElement.text = CurrentScore.ToString();
-        
 
     }
 }

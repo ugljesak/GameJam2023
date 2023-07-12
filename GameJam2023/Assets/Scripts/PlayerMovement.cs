@@ -100,7 +100,6 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		print(nutscript.maxNut);
         if (health <= 0)
         {
 			ChangeAnimation("playerdeath");
@@ -259,6 +258,8 @@ public class PlayerMovement : MonoBehaviour
 			nutscript.nutCount = 0;
 			nutscript.maxNut++;
 			nut.RandomPosition();
+			nutscript.maxtime += 5;
+			nutscript.timer = nutscript.maxtime;
         }
 		else
         {
