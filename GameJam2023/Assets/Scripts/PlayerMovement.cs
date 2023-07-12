@@ -351,7 +351,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.gameObject.tag == "saw" && !invincible)
+		if (collision.gameObject.tag == "saw" && !invincible && health>0)
 		{
 			print(invincible);
 			print("aaaaaaaaaaa");
