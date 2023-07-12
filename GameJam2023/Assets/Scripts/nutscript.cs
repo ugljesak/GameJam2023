@@ -21,11 +21,11 @@ public class nutscript : MonoBehaviour
 
     private void FixedUpdate()
     {
-		if (timer <= 0)
+		if (timer <= 0 && !PlayerMovement.isjuring)
 		{
 			PlayerMovement.health--;
 		}
-        timer -= Time.fixedDeltaTime;
+		timer = Mathf.Max(timer - Time.fixedDeltaTime, 0); 
         if (PlayerMovement.isjuring == true)
 		{
             transform.position = new Vector3(100.0f, 100.0f, 0.0f);
