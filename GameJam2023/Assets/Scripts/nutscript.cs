@@ -35,8 +35,7 @@ public class nutscript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
 	{
-		print("UVACEN SI BATO BRE");
-		if(collision.gameObject.tag == "Player")
+		if(collision.gameObject.tag == "Player" && !PlayerMovement.isjuring)
 		{
 			gameObject.GetComponent<AudioSource>().Play();
 			nutCount++;
@@ -47,7 +46,7 @@ public class nutscript : MonoBehaviour
 			}
 			else transform.position = new Vector3(100.0f, 100.0f, 0.0f);
 		}
-		if (collision.gameObject.tag == "enemy")
+		if (collision.gameObject.tag == "enemy" && PlayerMovement.isjuring)
 		{
 			nutCount++;
 			if (maxNut > nutCount)
