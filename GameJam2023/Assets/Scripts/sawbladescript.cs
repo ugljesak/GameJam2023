@@ -53,6 +53,7 @@ public class sawbladescript : MonoBehaviour
         }
         if (collision.gameObject.tag == "saw")
         {
+            gameObject.GetComponent<AudioSource>().Play();
             pravacnormale = gameObject.transform.position - collision.transform.position;
             pravacparalele.x = -pravacnormale.y;
             pravacparalele.y=pravacnormale.x;

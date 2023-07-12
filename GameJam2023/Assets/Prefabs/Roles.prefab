@@ -98,9 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a61a1553c16083348bf75740123983cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 0, y: 9, z: -1}
-  endPosition: {x: -18, y: 2, z: -1}
-  speed: 0
+  startPosition: {x: 0, y: 9, z: -5}
+  endPosition: {x: -18, y: 2, z: -5}
+  startSpeed: 13
 --- !u!82 &1588874671218457188
 AudioSource:
   m_ObjectHideFlags: 0
