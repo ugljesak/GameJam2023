@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1887929589301947199}
   m_Layer: 0
   m_Name: triangl
-  m_TagString: Wall
+  m_TagString: block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

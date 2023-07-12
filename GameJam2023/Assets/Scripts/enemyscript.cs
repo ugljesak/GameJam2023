@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
-using UnityEditor.Experimental.GraphView;
+//using UnityEditor.Build;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using static Unity.Collections.AllocatorManager;
@@ -94,7 +94,7 @@ public class enemyscript : MonoBehaviour
             {
                 ms = jurims;
             }
-            if (dashujem)
+            if (dashujem && !isjuring)
             {
                 if (dashcooldown <= dashCD - 0.05)
                 {
@@ -187,7 +187,7 @@ public class enemyscript : MonoBehaviour
                     }
                 }
             }
-            else
+            else if(!isattacking)
             {
                 if (isjuring) ChangeAnimation("enemyidle");
                 else ChangeAnimation("enemyidle1");
@@ -245,6 +245,8 @@ public class enemyscript : MonoBehaviour
             transform.position = pozjuri;
             animator.Play("enemyidle");
         }
+        canmove = true;
+        isattacking = false;
     }
 
     private void Dash()
@@ -325,11 +327,9 @@ public class enemyscript : MonoBehaviour
             {
                 ChangeAnimation("enemyhit");
             }
-            if (health == 0)
+            if (health <= 0)
             {
                 print("UMRO enemy");
-                nutscript.nutCount = 0;
-                nutscript.maxNut = maxhealth + 1;
             }
             Destroy(collision.gameObject);
         }
