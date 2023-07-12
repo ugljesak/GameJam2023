@@ -8,18 +8,28 @@ public class finishscript : MonoBehaviour
     public enemyscript enemy;
     public Collider2D finishcollider;
     public int potrebanbrsrafova;
+    public SpriteRenderer sr;
+    public Sprite vrata;
+    public Sprite blocks_12;
+
     void Start()
     {
         potrebanbrsrafova = 0;
         finishcollider.enabled = false;
-
+        sr=GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
     {
-        if (player.brsrafova == potrebanbrsrafova)
+        if (nutscript.nutCount==nutscript.maxNut)
         {
             finishcollider.enabled = true;
+            sr.sprite = vrata;
+        }
+        else
+        {
+            finishcollider.enabled = false;
+            sr.sprite = blocks_12;
         }
     }
 

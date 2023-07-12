@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1532925329, guid: 4dbe16d00cbacba418ab8440f6d712e7, type: 3}
+  m_Sprite: {fileID: 1532925329, guid: 9bad31501a005dc4685da05c3c916dac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 5153303234068553192}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 8f926f87c94c2e84f8693654d6b78f80, type: 2}
+  m_Material: {fileID: 6200000, guid: 7fb75c06491e233439c81b73fe3ede0c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -151,7 +151,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 8f926f87c94c2e84f8693654d6b78f80, type: 2}
+  m_Material: {fileID: 6200000, guid: 7fb75c06491e233439c81b73fe3ede0c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

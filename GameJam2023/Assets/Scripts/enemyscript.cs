@@ -22,8 +22,9 @@ public class enemyscript : MonoBehaviour
     int i = 0;
     int j = 0;
     bool bilazamena = false;
+    float timezainput;
     bool invincible = false;
-    int maxhealth = 1;
+    public static int maxhealth = 1;
     public static int health = 1;
     Vector3 pozbezi = new Vector3((float)-8.87, (float)-4.35,1);
     Vector3 pozjuri = new Vector3((float)9.84, (float)4.35,1);
@@ -93,7 +94,7 @@ public class enemyscript : MonoBehaviour
             {
                 ms = jurims;
             }
-            if (dashujem)
+            if (dashujem && !isjuring)
             {
                 if (dashcooldown <= dashCD - 0.05)
                 {
@@ -120,7 +121,6 @@ public class enemyscript : MonoBehaviour
             {
                 orientation =new Vector2(0, 0);
             }
-            print(orientation);
             if (orientation != Vector2.zero) lookingDirection = orientation;
             bladeSpawner.GetComponent<spawnerscript>().orientation = lookingDirection;
             if (canmove)
@@ -187,7 +187,7 @@ public class enemyscript : MonoBehaviour
                     }
                 }
             }
-            else
+            else if(!isattacking)
             {
                 if (isjuring) ChangeAnimation("enemyidle");
                 else ChangeAnimation("enemyidle1");
@@ -245,6 +245,8 @@ public class enemyscript : MonoBehaviour
             transform.position = pozjuri;
             animator.Play("enemyidle");
         }
+        canmove = true;
+        isattacking = false;
     }
 
     private void Dash()
@@ -325,12 +327,11 @@ public class enemyscript : MonoBehaviour
             {
                 ChangeAnimation("enemyhit");
             }
-            if (health == 0)
+            if (health <= 0)
             {
                 print("UMRO enemy");
-                nutscript.nutCount = 0;
-                nutscript.maxNut = maxhealth + 1;
             }
+            Destroy(collision.gameObject);
         }
     }
 

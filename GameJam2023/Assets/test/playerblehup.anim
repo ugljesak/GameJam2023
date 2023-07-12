@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: enemyhit
+  m_Name: playerblehup
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,25 +21,21 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -2045010081, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
-    - time: 0.05
-      value: {fileID: 2060926477, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
+      value: {fileID: -1917101416, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
     - time: 0.1
-      value: {fileID: 905708249, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
-    - time: 0.15
-      value: {fileID: -1857065521, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
+      value: {fileID: 1231848401, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
     - time: 0.2
-      value: {fileID: 1322719911, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
-    - time: 0.25
-      value: {fileID: -1724638526, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
+      value: {fileID: 2109013942, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
     - time: 0.3
-      value: {fileID: 1439384920, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
+      value: {fileID: 2115315837, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
+    - time: 0.4
+      value: {fileID: 1150417844, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 20
+  m_SampleRate: 10
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -56,24 +52,22 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -2045010081, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
-    - {fileID: 2060926477, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
-    - {fileID: 905708249, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
-    - {fileID: -1857065521, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
-    - {fileID: 1322719911, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
-    - {fileID: -1724638526, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
-    - {fileID: 1439384920, guid: 4df5325629851cf499bd55bd53f31fab, type: 3}
+    - {fileID: -1917101416, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
+    - {fileID: 1231848401, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
+    - {fileID: 2109013942, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
+    - {fileID: 2115315837, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
+    - {fileID: 1150417844, guid: 61d549dfea61b414392a1cd9c263d605, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.35000002
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -89,14 +83,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: HitStart
+    functionName: SawStart
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.3
-    functionName: HitEnd
+  - time: 0.4
+    functionName: SawEnd
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
