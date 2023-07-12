@@ -64,7 +64,6 @@ public class finishscript : MonoBehaviour
 
     public void EndSpawn()
     {
-        print("ASDAAA");
         ChangeAnimation("portal");
     }
 }

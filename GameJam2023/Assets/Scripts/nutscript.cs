@@ -10,11 +10,16 @@ public class nutscript : MonoBehaviour
 	// maxNut i nutCount se menjaju u PlayerMovement.ReverseRoles()
 	public static float maxtime;
 	public static float timer;
+	//public List<Vector2> positions;
+    public List<Vector2> lastpositions = new List<Vector2>();
+	public int i = 1;
+	public Animator animator;
+
     void Start()
     {
 		maxNut = 1;
 		nutCount = 0;
-        transform.position = new Vector3(Random.Range(0, 10), Random.Range(-5, 5), 1);
+        RandomPosition();
 		maxtime = 10;
 		timer = 10;
     }
@@ -25,20 +30,7 @@ public class nutscript : MonoBehaviour
 		{
 			PlayerMovement.health--;
 		}
-		timer = Mathf.Max(timer - Time.fixedDeltaTime, 0); 
-        if (PlayerMovement.isjuring == true)
-		{
-            transform.position = new Vector3(100.0f, 100.0f, 0.0f);
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "block")
-        {
-            RandomPosition();
-            return;
-        }
+		timer = Mathf.Max(timer - Time.fixedDeltaTime, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -48,13 +40,23 @@ public class nutscript : MonoBehaviour
 		{
 			gameObject.GetComponent<AudioSource>().Play();
 			nutCount++;
-			if (maxNut > nutCount)
+            lastpositions.Add(transform.position);
+            if (maxNut > nutCount)
 			{
-				RandomPosition();
-				
+				RandomPosition();		
 			}
 			else transform.position = new Vector3(100.0f, 100.0f, 0.0f);
 		}
+		if (collision.gameObject.tag == "enemy")
+		{
+			nutCount++;
+			if (maxNut > nutCount)
+			{
+				transform.position = lastpositions[i];
+				i++;
+			}
+			else transform.position=new Vector3(100.0f, 100.0f, 0.0f);
+        }
 	}
 
 	public void RandomPosition()
@@ -67,6 +69,10 @@ public class nutscript : MonoBehaviour
 		{
             transform.position = new Vector3(Random.Range(-10, 0), Random.Range(-5, 5), 1);
         }
+		if (Mathf.Abs(transform.position.x) + Mathf.Abs(transform.position.y) <= 3)
+		{
+			RandomPosition();
+		}
     }
 
 	private void OnTriggerStay2D(Collider2D collision)

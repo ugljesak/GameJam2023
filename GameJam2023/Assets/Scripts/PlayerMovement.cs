@@ -103,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
         if (health <= 0)
         {
 			ChangeAnimation("playerdeath");
-            print("UMRO player");
 			return;
         }
         if (isjuring)
@@ -246,7 +245,8 @@ public class PlayerMovement : MonoBehaviour
 		rolesmovement.revv = true;
 		reversedmovement.revv = true;
 		sawbladescript.revv = true;
-		if (isjuring)
+        nutscript.nutCount = 0;;
+        if (isjuring)
         {
             invincible = false;
             ms = bezims;
@@ -255,12 +255,13 @@ public class PlayerMovement : MonoBehaviour
 			transform.position = pozbezi;
 			health = 1;
             animator.Play("playeridle1");
-			nutscript.nutCount = 0;
-			nutscript.maxNut++;
 			nut.RandomPosition();
-			nutscript.maxtime += 5;
+            nutscript.maxNut++;
+            nutscript.maxtime += 5;
 			nutscript.timer = nutscript.maxtime;
-			finish.GetComponent<Animator>().Play("empty");
+			nut.lastpositions.Clear();
+			nut.animator.Play("nut");
+			finish.animator.Play("empty");
 			finish.dosoportal = false;
         }
 		else
@@ -272,7 +273,11 @@ public class PlayerMovement : MonoBehaviour
 			transform.position = pozjuri;
 			score++;
             animator.Play("playeridle");
-			nut.transform.position = new Vector3(100.0f, 100.0f, 0.0f);
+			print(nut.lastpositions[0]);
+			nut.transform.position = nut.lastpositions[0];
+			nut.i = 1;
+            nut.animator.Play("nutopacity");
+
         }
 		canmove = true;
 		isattacking = false;
