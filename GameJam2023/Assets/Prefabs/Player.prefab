@@ -181,10 +181,12 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   collisionOffset: 0.05
-  CD: 0
+  CDbetweenrounds: 1
   reverseSound: {fileID: 6521320830863694336, guid: c61e1ab5807013a4b9005a99feed643a, type: 3}
   deathSound: {fileID: 3501422537278680317, guid: 5a632ce2f21d4324d9f8d4eca2e102bc, type: 3}
   dashSound: {fileID: 8389731538325479997, guid: ba5dd5ea18377ec40bc99f43ab601073, type: 3}
+  nut: {fileID: 0}
+  finish: {fileID: 0}
 --- !u!70 &577371388905009559
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

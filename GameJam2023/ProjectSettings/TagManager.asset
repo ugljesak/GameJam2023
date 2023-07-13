@@ -9,6 +9,8 @@ TagManager:
   - NeededHeart
   - NeededCog
   - Wall
+  - enemycollider
+  - block
   layers:
   - Default
   - TransparentFX

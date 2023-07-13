@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
 	Vector2 pozbezi=new Vector2((float)-8.87, (float)-4.35);
     Vector2 pozjuri = new Vector2((float)9.84, (float)4.35);
 	float CD;
+	public float CDbetweenrounds;
 	public GameObject reverseSound;
 	public GameObject deathSound;
 	public GameObject dashSound;
@@ -67,8 +68,9 @@ public class PlayerMovement : MonoBehaviour
 		invincible = false;
 		health = 1;
 		isjuring = false;
-		canmove = true;
+		canmove = false;
 		curanim = "playeridle1";
+		CD = CDbetweenrounds;
 	}
 
 	void ChangeAnimation(string newanim)
@@ -212,12 +214,17 @@ public class PlayerMovement : MonoBehaviour
 		}
 		//print(dashcooldown);
 		time += Time.fixedDeltaTime;
-		if (CD <= 0 || zavrsio == true)
+		if (CD <= 0)
+		{
+            nutscript.timer = Mathf.Max(nutscript.timer - Time.fixedDeltaTime, 0);
+        }
+		if (CD <= 0 && CD>=-0.02) //|| zavrsio == true)
 		{
 			rolesmovement.revv = false;
 			reversedmovement.revv = false;
 			sawbladescript.revv = false;
 			zavrsio = false;
+			canmove = true;
 		}
 
 	}
@@ -241,11 +248,13 @@ public class PlayerMovement : MonoBehaviour
 		putanja.Clear();
 		inputtime.Clear();
         time = 0;
-        CD = 2.5f;
+        CD = CDbetweenrounds;
 		rolesmovement.revv = true;
 		reversedmovement.revv = true;
 		sawbladescript.revv = true;
-        nutscript.nutCount = 0;;
+        nutscript.nutCount = 0;
+        finish.animator.Play("empty");
+        finish.dosoportal = false;
         if (isjuring)
         {
             invincible = false;
@@ -257,12 +266,10 @@ public class PlayerMovement : MonoBehaviour
             animator.Play("playeridle1");
 			nut.RandomPosition();
             nutscript.maxNut++;
-            nutscript.maxtime += 5;
+            nutscript.maxtime += 2;
 			nutscript.timer = nutscript.maxtime;
 			nut.lastpositions.Clear();
 			nut.animator.Play("nut");
-			finish.animator.Play("empty");
-			finish.dosoportal = false;
         }
 		else
         {
@@ -273,13 +280,12 @@ public class PlayerMovement : MonoBehaviour
 			transform.position = pozjuri;
 			score++;
             animator.Play("playeridle");
-			print(nut.lastpositions[0]);
 			nut.transform.position = nut.lastpositions[0];
 			nut.i = 1;
             nut.animator.Play("nutopacity");
 
         }
-		canmove = true;
+		canmove = false;
 		isattacking = false;
 	}
 

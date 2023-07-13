@@ -61,7 +61,7 @@ public class enemyscript : MonoBehaviour
         invincible = false;
         health = 1;
         maxhealth = 1;
-        CD = 2;
+        CD = player.CDbetweenrounds;
         curanim = "enemyidle1";
     }
 
@@ -173,7 +173,7 @@ public class enemyscript : MonoBehaviour
 
                 if (j < inputtime.Count)
                 {
-                    if (time >= inputtime[j])
+                    if (time == inputtime[j])
                     {
                         j++;
                         if (isjuring)
@@ -196,6 +196,10 @@ public class enemyscript : MonoBehaviour
         dashcooldown -= Time.fixedDeltaTime;
         sawcooldown -= Time.fixedDeltaTime;
         CD-=Time.fixedDeltaTime;
+        if (CD <= 0 && CD>=-0.02)
+        {
+            canmove = true;
+        }
         time += Time.fixedDeltaTime;
     }
 
@@ -214,7 +218,7 @@ public class enemyscript : MonoBehaviour
 
     public void ReverseRoles()
     {
-        CD = 2;
+        print("RRenemy");
         health = maxhealth;
         i = 0;
         j = 0;
@@ -245,7 +249,9 @@ public class enemyscript : MonoBehaviour
             transform.position = pozjuri;
             animator.Play("enemyidle");
         }
-        canmove = true;
+        CD = player.CDbetweenrounds;
+        print(CD);
+        canmove = false;
         isattacking = false;
     }
 
@@ -347,7 +353,6 @@ public class enemyscript : MonoBehaviour
         ReverseRoles();
         player.ReverseRoles();
         ChangeAnimation("enemyidle1");
-        canmove = true;
         health = maxhealth;
     }
 

@@ -30,7 +30,6 @@ public class nutscript : MonoBehaviour
 		{
 			PlayerMovement.health--;
 		}
-		timer = Mathf.Max(timer - Time.fixedDeltaTime, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
