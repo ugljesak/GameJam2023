@@ -61,24 +61,15 @@ public class nutscript : MonoBehaviour
 	{
 		if (nutCount % 2 == 0)
 		{
-            transform.position = new Vector3(Random.Range(0, 10), Random.Range(-5, 5), 1);
+            transform.position = new Vector3(Random.Range(0, 11), Random.Range(-5, 6), 1);
         }
 		else
 		{
-            transform.position = new Vector3(Random.Range(-10, 0), Random.Range(-5, 5), 1);
+            transform.position = new Vector3(Random.Range(-10, 1), Random.Range(-5, 6), 1);
         }
 		if (Mathf.Abs(transform.position.x) + Mathf.Abs(transform.position.y) <= 3)
 		{
 			RandomPosition();
 		}
     }
-
-	private void OnTriggerStay2D(Collider2D collision)
-	{
-		if (collision.gameObject.tag == "block")
-		{
-			transform.position = new Vector3(Random.Range(-10, 10), Random.Range(-5, 5), 1);
-			return;
-		}
-	}
 }

@@ -55,7 +55,7 @@ public class RedHeartsTMP : MonoBehaviour
         }
         if(PlayerMovement.health == 0)
         {
-            DeathScreenVariable.Setup(deathscreenscore.GetComponent<ScoreTMP>().CurrentScore);
+            DeathScreenVariable.Setup(nutscript.maxNut);
         }
  
     }

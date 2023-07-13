@@ -8,11 +8,12 @@ using UnityEngine.SceneManagement;
 public class DeathScreenScript : MonoBehaviour
 {
     public TextMeshProUGUI scorepoints;
+
     public void Setup(int score)
-    {
-        gameObject.SetActive(true);
-        scorepoints.text = score.ToString();
-    }
+     {
+         gameObject.SetActive(true);
+         scorepoints.text = score.ToString();
+     }
     public void RestartButton() {
         gameObject.GetComponent<AudioSource>().Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -20,6 +21,6 @@ public class DeathScreenScript : MonoBehaviour
     public void ExitButton()
     {
         gameObject.GetComponent<AudioSource>().Play();
-        SceneManager.LoadSceneAsync("DodosMenu"); //
+        SceneManager.LoadSceneAsync("MapScene"); 
     }
 }

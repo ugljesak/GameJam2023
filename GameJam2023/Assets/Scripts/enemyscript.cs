@@ -23,7 +23,7 @@ public class enemyscript : MonoBehaviour
     int j = 0;
     bool bilazamena = false;
     float timezainput;
-    bool invincible = false;
+    public static bool invincible = false;
     public static int maxhealth = 1;
     public static int health = 1;
     Vector3 pozbezi = new Vector3((float)-8.87, (float)-4.35,1);

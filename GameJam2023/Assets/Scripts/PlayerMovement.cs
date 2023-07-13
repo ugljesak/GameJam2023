@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
@@ -13,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 	public static int health = 1;
 	public static int score = 0;
 	static public bool zavrsio = false;
+	static public int highscore2;
 
 	float time;
 	[HideInInspector]
@@ -53,10 +55,12 @@ public class PlayerMovement : MonoBehaviour
 	bool isdying = false;
 	public nutscript nut;
 	public finishscript finish;
+	Scene currentscene;
 
     void Start()
 	{
-		rb = GetComponent<Rigidbody2D>();
+        currentscene = SceneManager.GetActiveScene();
+        rb = GetComponent<Rigidbody2D>();
 		animator = GetComponent<Animator>();
 		transform.position = pozbezi;
 		ms = jurims;
@@ -105,6 +109,15 @@ public class PlayerMovement : MonoBehaviour
         if (health <= 0)
         {
 			ChangeAnimation("playerdeath");
+			enemyscript.invincible = true;
+			if (currentscene.name == "Map2")
+			{
+				if (nutscript.maxNut > highscore2) 
+				{
+					highscore2 = nutscript.maxNut;
+					PlayerPrefs.SetInt("highscore2",highscore2);
+				}
+			}
 			return;
         }
         if (isjuring)

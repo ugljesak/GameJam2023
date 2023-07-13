@@ -57,6 +57,7 @@ public class finishscript : MonoBehaviour
         if(collision.gameObject.tag=="enemy" && !enemy.isjuring)
         {
             PlayerMovement.health = 0;
+
         }
     }
 
